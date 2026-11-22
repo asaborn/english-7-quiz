@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Quiz Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lexend:wght@400;500;600&family=Rubik:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday study app for a 12-year-old: friendly, clear and encouraging, never babyish
+   IDEA an English workbook page marked with highlighter pens (noun blue, verb pink, adjective yellow) and checked with the teacher's pen
+   PICTURE home: a paper sentence strip with highlighter swipes and part-of-speech labels; in practice the big question card is the picture
+   COLOUR white paper and black ink, a full-width yellow highlighter band, pink teacher's pen as the accent, blue and orange pens, green and red marks
+   TYPE Rubik for titles and buttons, Lexend for reading, Caveat only for the handwritten grade and the good-luck note
+   LAYOUT one 760px column; home: yellow band (title, strip), topic rows, the ink test card, quick review; the phone keeps the same order */
+:root{--bg:#fff;--card:#fff;--soft:#f4f3f8;--ink:#17161c;--mute:#5a5766;--line:#e0dee7;--band:#ffe14a;--yel:#ffe14a;--pink:#ff93c3;--blue:#9dd6ff;--orng:#ffbe70;--key:#e8e5f0;--ok:#0c8a4d;--okbg:#e2f5e9;--bad:#cc2f36;--badbg:#fde9e9;--warn:#8a5600;--warnbg:#fff0cc;--meterw:#e3a300;--pen:#e0245e;--penbtn:#e0245e;--deep:#17161c;--deepink:#fff;--focus:#2563eb;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#121116;--card:#1c1b22;--soft:#26252e;--ink:#f2f0f7;--mute:#b4b0c2;--line:#363441;--band:#e8ca40;--yel:#edcf48;--pink:#f38bba;--blue:#82c6f3;--orng:#f2ad60;--key:#3b3947;--ok:#47d494;--okbg:#14301f;--bad:#ff7378;--badbg:#3b1c20;--warn:#f3b752;--warnbg:#382c12;--meterw:#e8b53a;--pen:#ff6f9d;--penbtn:#cf1858;--deep:#2a2933;--deepink:#fff;--focus:#82a8ff;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#121116;--card:#1c1b22;--soft:#26252e;--ink:#f2f0f7;--mute:#b4b0c2;--line:#363441;--band:#e8ca40;--yel:#edcf48;--pink:#f38bba;--blue:#82c6f3;--orng:#f2ad60;--key:#3b3947;--ok:#47d494;--okbg:#14301f;--bad:#ff7378;--badbg:#3b1c20;--warn:#f3b752;--warnbg:#382c12;--meterw:#e8b53a;--pen:#ff6f9d;--penbtn:#cf1858;--deep:#2a2933;--deepink:#fff;--focus:#82a8ff;color-scheme:dark}
+:root[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Lexend,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:clip}
+h1,h2,h3,h4,.btn,.tab,.let,.tname,.prog,.back,.chip,.dot,.fbh,.sent,.demo,.formula,.model,.tn,.tv,.rs{font-family:Rubik,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{letter-spacing:-.02em;text-wrap:balance}
+.wrap{width:100%;max-width:792px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.hero{background:var(--band);color:#17161c;padding:28px 0 26px}
+.hero h1{font-size:clamp(36px,9vw,48px);line-height:1.05;margin:0;font-weight:800}
+.for{margin:6px 0 18px}
+.strip{background:var(--card);color:var(--ink);border-radius:16px;padding:18px 16px 12px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:flex-start;box-shadow:0 3px 0 rgba(23,22,28,.22)}
+.sw{display:inline-flex;flex-direction:column;align-items:center;gap:2px}
+.sw>span{font:600 24px/1.3 Rubik,system-ui,sans-serif}
+.sw small{font-size:14px;color:var(--mute);min-height:1.4em}
+.luck{font:700 30px/1 Caveat,cursive;color:#bb1149;transform:rotate(-3deg);margin:16px 6px 0 0;text-align:right}
+.hl{color:#17161c;background-image:linear-gradient(transparent 10%,var(--c,var(--yel)) 10%,var(--c,var(--yel)) 90%,transparent 90%);background-repeat:no-repeat;background-size:100% 100%;border-radius:.3em .5em .35em .55em;padding:0 .2em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.n{--c:var(--blue)}.v{--c:var(--pink)}.a{--c:var(--yel)}.o{--c:var(--orng)}
+.strip .hl{animation:swipe .55s cubic-bezier(.3,.7,.4,1) both;animation-delay:calc(var(--i) * 150ms + 250ms)}
+@keyframes swipe{from{background-size:0% 100%}}
+.list{padding-top:22px;padding-bottom:44px}
+.sec{font-size:14px;color:var(--mute);margin:6px 0 10px;font-weight:600}
+.trow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px 14px 16px 18px;margin:0 0 12px;cursor:pointer}
+.trow:hover{border-color:var(--ink)}
+.trow:active{transform:translateY(1px)}
+.tname{grid-column:1;font-size:24px;font-weight:700;line-height:1.25}
+.tsub,.tmeta,.tbest{grid-column:1}
+.tmeta,.tbest{font-size:14px;color:var(--mute)}
+.tbest{color:var(--ok);font-weight:600}
+.go{grid-column:2;grid-row:1/span 4;align-self:center;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--soft)}
+.t-pos{--c:var(--yel)}.t-tense{--c:var(--pink)}.t-stat{--c:var(--orng)}
+.testcard{background:var(--deep);color:var(--deepink);border-radius:20px;padding:22px 20px 20px;margin:20px 0 12px}
+.testcard h2{font-size:32px;line-height:1.05;margin:0 0 8px}
+.testcard p{margin:0 0 14px}
+.last{font-weight:600}
+.bar{background:var(--c);color:#17161c}
+.bar.t-test{--c:var(--deep);color:var(--deepink)}.bar.t-cheat{--c:var(--band)}
+.barin{display:flex;align-items:center;gap:10px;min-height:64px;padding-top:8px;padding-bottom:8px}
+.back{flex:none;display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 12px 0 8px;border-radius:12px;border:0;background:rgba(255,255,255,.6);color:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.t-test .back{background:rgba(255,255,255,.16)}
+.ttl{font-size:24px;line-height:1.1;margin:0;font-weight:800}
+.tabs{display:flex;gap:8px;padding-top:14px}
+.tab{flex:1 1 0;min-height:52px;border:2px solid var(--line);background:var(--card);border-radius:14px;font-weight:600;font-size:17px;line-height:1.15;padding:6px 8px;cursor:pointer}
+.tab.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.prog{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;color:var(--mute);margin:18px 0 8px;font-weight:600}
+.sc{display:inline-flex;align-items:center;gap:4px;color:var(--ok)}
+.pbar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.pbar i{display:block;height:100%;background:var(--ink);border-radius:6px;transition:width .3s}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:22px 18px 20px;margin-bottom:16px}
+.trk{margin:0 0 8px;text-align:center;font-size:14px;font-weight:700;color:var(--pen)}
+.sent{font-weight:600;font-size:24px;line-height:1.45;text-align:center;margin:2px 0 12px}
+.sent b.key{font-weight:800;background:var(--key);border-radius:6px;padding:0 .15em;box-shadow:inset 0 -3px 0 var(--ink)}
+.qq{color:var(--mute);text-align:center;margin:0 0 16px;font-weight:500}
+.qbig{font-weight:600;font-size:24px;line-height:1.35;text-align:center;margin:2px 0 16px;font-family:Rubik,system-ui,sans-serif}
+.blank{display:inline-block;width:3.4em;height:1.05em;border-bottom:3px solid var(--ink);vertical-align:-.12em;margin:0 .12em}
+b.key{font-weight:700}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 14px;font-weight:500;line-height:1.35;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--ink)}
+.let{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--soft);font-weight:700;font-size:14px}
+.otx{flex:1}
+.mk{flex:none;display:grid;place-items:center}
+.opt.sel{border-color:var(--ink);background:var(--soft)}.opt.sel .let{background:var(--ink);color:var(--bg)}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .let{background:var(--ok);color:#fff}.opt.ok .mk{color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}.opt.bad .let{background:var(--bad);color:#fff}.opt.bad .mk{color:var(--bad)}
+.opt.dim{opacity:.55}
+.opt[disabled]{cursor:default}
+.fb{border-radius:16px;padding:14px 16px;margin-top:16px}
+.fb.ok{background:var(--okbg)}.fb.bad{background:var(--badbg)}.fb.warn{background:var(--warnbg)}
+.fbh{display:flex;align-items:center;gap:8px;font-weight:700;margin:0}
+.fb.ok .fbh{color:var(--ok)}.fb.bad .fbh{color:var(--bad)}.fb.warn .fbh{color:var(--warn)}
+.fb p{margin:8px 0 0}
+.note{font-weight:600}
+.lbl{font-size:14px;color:var(--mute);margin:0 0 6px;font-weight:600}
+.inp{display:block;width:100%;font:500 17px/1.45 Lexend,system-ui,sans-serif;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;resize:vertical}
+.inp:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--ink)}
+.inp[readonly]{background:var(--soft)}
+.warnmsg{color:var(--bad);font-weight:600;font-size:14px;margin:6px 0 0}
+.warnmsg:empty{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border-radius:14px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);font-weight:600;font-size:17px;line-height:1.2;cursor:pointer;text-align:center}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.pen{background:var(--penbtn);border-color:var(--penbtn);color:#fff}
+.btn.big{width:100%}
+.btn.small{min-height:44px;font-size:14px;padding:0 14px}
+.btn[disabled]{opacity:.4;cursor:default}
+.testcard .btn.ghost,.t-test .btn.ghost{color:var(--deepink);border-color:var(--deepink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.row>.btn{flex:1 1 200px}
+.mt{margin-top:14px}
+.linkbtn{background:none;border:0;padding:0 4px;font-weight:700;text-decoration:underline;cursor:pointer;min-height:44px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:2px 0 14px}
+.chip{min-height:44px;padding:0 16px;border-radius:22px;border:2px dashed var(--mute);background:var(--soft);font-weight:600;font-size:17px;cursor:pointer}
+.chiprow{display:flex;justify-content:flex-end;margin-top:6px}
+.self{background:var(--soft);border-radius:16px;padding:14px 16px;margin-top:16px}
+.model{font-weight:600;background:var(--card);border-radius:12px;padding:10px 12px;margin:8px 0 10px}
+.cl{padding-left:1.2em;margin:6px 0 4px}
+.cl li{margin:4px 0}
+.aiby{font-size:14px;color:var(--mute);margin:8px 0 0}
+.load{display:inline-flex;gap:4px;margin-left:4px}
+.load i{width:7px;height:7px;border-radius:50%;background:currentColor;animation:blink 1s infinite}
+.load i:nth-child(2){animation-delay:.15s}.load i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.end{padding:4px 0 44px}
+.grade{position:relative;width:220px;height:140px;margin:6px auto 0;color:var(--pen)}
+.grade svg{position:absolute;inset:0;width:100%;height:100%}
+.grade span{position:absolute;inset:0;display:grid;place-items:center;font:700 64px/1 Caveat,cursive;padding-top:6px}
+.pct{text-align:center;font-weight:600;margin:0;color:var(--mute)}
+.verdict{text-align:center;font-size:32px;line-height:1.1;margin:12px 0 6px}
+.endmsg{text-align:center;margin:0 auto 18px;max-width:32em}
+.tres{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.tn{font-weight:600}
+.meter{grid-column:1/-1;height:12px;background:var(--line);border-radius:8px;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:8px}
+.meter i.ok{background:var(--ok)}.meter i.warn{background:var(--meterw)}.meter i.bad{background:var(--bad)}
+.tv{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-block;font-size:14px;font-weight:600;padding:1px 10px;border-radius:20px;margin-left:8px;white-space:nowrap;font-family:Lexend,system-ui,sans-serif}
+.tag.ok{background:var(--okbg);color:var(--ok)}.tag.warn{background:var(--warnbg);color:var(--warn)}.tag.bad{background:var(--badbg);color:var(--bad)}
+.tres .btn{grid-column:1/-1;justify-self:start}
+.h3{font-size:24px;margin:26px 0 6px}
+.ritem{border:2px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0;background:var(--card)}
+.rtop{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;font-size:14px;margin:0 0 6px;color:var(--mute)}
+.rst{display:inline-flex;align-items:center;gap:4px;font-weight:700}
+.rst.correct{color:var(--ok)}.rst.almost{color:var(--warn)}.rst.wrong{color:var(--bad)}
+.rs{font-weight:600;margin:4px 0}
+.rs b.key{background:var(--key);border-radius:4px;padding:0 .12em}
+.rq{font-size:14px;color:var(--mute);margin:2px 0 8px}
+.ra{margin:4px 0}
+.ritem .exp{margin:8px 0 0;padding-top:8px;border-top:1px solid var(--line)}
+.filter{display:flex;justify-content:flex-end;margin:8px 0 0}
+.tnav{display:flex;gap:10px;margin:2px 0 14px}
+.tnav .btn{flex:1}
+.dots{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;margin:6px 0 36px}
+.dot{height:44px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--mute);font-weight:600;font-size:14px;cursor:pointer}
+.dot.done{background:var(--soft);color:var(--ink);border-color:var(--soft)}
+.dot.cur{border-color:var(--ink);color:var(--ink)}
+.intro ul{padding-left:1.2em}
+.intro li{margin:6px 0}
+.learn{padding:4px 0}
+.lsec{padding:20px 0;border-bottom:1px solid var(--line)}
+.lsec h3{font-size:24px;line-height:1.2;margin:0 0 10px}
+.lsec h4{font-size:17px;margin:16px 0 6px}
+.lsec p{margin:8px 0}
+.demo{font-weight:600;font-size:24px;line-height:1.7;margin:10px 0}
+.keys{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.keys .hl{font-family:Rubik,system-ui,sans-serif;font-weight:600;padding:2px 10px}
+.scroll{overflow-x:auto}
+.tbl{border-collapse:collapse;width:100%}
+.tbl th,.tbl td{text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl thead th{font-size:14px;color:var(--mute);font-weight:600;font-family:Rubik,system-ui,sans-serif}
+.tbl tbody th{font-weight:600;padding-right:14px}
+.kv th{width:46%}
+.tips{padding-left:1.2em;margin:10px 0}
+.tips li{margin:6px 0}
+.ex{display:inline-block;margin:4px 8px 4px 0;padding:3px 10px 3px 8px;border-radius:10px;font-weight:500}
+.ex.yes{background:var(--okbg)}.ex.no{background:var(--badbg)}
+.ex::before{font-weight:800;margin-right:6px;font-family:system-ui,sans-serif}
+.ex.yes::before{content:"\2713\FE0E";color:var(--ok)}
+.ex.no::before{content:"\2717\FE0E";color:var(--bad)}
+.watch{background:var(--warnbg);border-radius:14px;padding:12px 14px;margin:12px 0}
+.watch .wt{display:block;font-family:Rubik,system-ui,sans-serif;font-weight:700;color:var(--warn);margin-bottom:2px}
+.tip{background:var(--soft);border-radius:12px;padding:10px 12px}
+.formula{font-weight:700;font-size:24px;text-align:center;margin:6px 0 12px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.two>div{background:var(--soft);border-radius:14px;padding:12px 14px}
+.two h4{margin-top:0}
+.pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px;margin:8px 0}
+.pairs p{margin:4px 0}
+.pairs em{font-style:normal;font-size:14px;color:var(--mute);margin-left:6px}
+.small{font-size:14px;color:var(--mute)}
+.after{display:grid;gap:10px;padding:18px 0 40px}
+.center{text-align:center}
+@media (max-width:560px){.pairs{grid-template-columns:minmax(0,1fr)}.card{padding:20px 14px 18px}.sent,.qbig{font-size:22px}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<template id="learn-pos">
+<section class="lsec">
+  <h3>Every word has a job</h3>
+  <p>In a sentence, every word has a job. We call the job its <b>part of speech</b>. For your quiz you need three of them.</p>
+  <p class="demo">The <span class="hl a">happy</span> <span class="hl n">girl</span> <span class="hl v">reads</span> a <span class="hl a">new</span> <span class="hl n">book</span>.</p>
+  <div class="keys"><span class="hl n">noun</span><span class="hl v">verb</span><span class="hl a">adjective</span></div>
+</section>
+<section class="lsec">
+  <h3><span class="hl n">Nouns</span></h3>
+  <p>A noun is a <b>person</b>, an <b>animal</b>, a <b>place</b>, a <b>thing</b> or an <b>idea</b>.</p>
+  <div class="scroll"><table class="tbl kv"><tbody>
+    <tr><th>People</th><td>teacher, girl, Dana, mother</td></tr>
+    <tr><th>Animals</th><td>dog, horse, bird</td></tr>
+    <tr><th>Places</th><td>school, park, Haifa</td></tr>
+    <tr><th>Things</th><td>phone, book, table</td></tr>
+    <tr><th>Ideas, feelings</th><td>love, friendship, happiness</td></tr>
+  </tbody></table></div>
+  <ul class="tips">
+    <li>You can put <b>a</b>, <b>an</b> or <b>the</b> before most nouns: a book, an apple, the park.</li>
+    <li>Most nouns have a plural: one book → two books, a box → two boxes, a child → children.</li>
+    <li>Names of people and places start with a capital letter: Dana, Israel, London.</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3><span class="hl v">Verbs</span></h3>
+  <p>A verb tells us what someone <b>does</b> (an action), or what someone <b>is</b>, <b>has</b> or <b>thinks</b> (a state).</p>
+  <div class="scroll"><table class="tbl kv"><tbody>
+    <tr><th>Actions</th><td>run, eat, play, write, swim, read</td></tr>
+    <tr><th>States</th><td>be (am, is, are), have, like, know, think</td></tr>
+  </tbody></table></div>
+  <ul class="tips">
+    <li>You can put <b>I</b>, <b>you</b>, <b>we</b> or <b>they</b> before a verb: I swim, they eat.</li>
+    <li>Verbs change with the subject and the time: I play, she plays, they are playing.</li>
+    <li><b>am</b>, <b>is</b> and <b>are</b> are verbs too!</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3><span class="hl a">Adjectives</span></h3>
+  <p>An adjective <b>describes a noun</b>. It tells us what someone or something is like.</p>
+  <div class="scroll"><table class="tbl kv"><tbody>
+    <tr><th>Size</th><td>big, small, tall, long</td></tr>
+    <tr><th>Color</th><td>red, blue, black, white</td></tr>
+    <tr><th>Feelings</th><td>happy, sad, angry, bored</td></tr>
+    <tr><th>Opinion</th><td>beautiful, funny, boring, nice</td></tr>
+  </tbody></table></div>
+  <h4>Three rules</h4>
+  <ol class="tips">
+    <li>The adjective comes <b>before</b> the noun.<br><span class="ex yes">a red car</span><span class="ex no">a car red</span></li>
+    <li>Or it comes <b>after be</b> (am, is, are).<br><span class="ex yes">The car is red.</span><span class="ex yes">My sister is happy.</span></li>
+    <li>Adjectives <b>never take -s</b>.<br><span class="ex yes">two red cars</span><span class="ex no">two reds cars</span><span class="ex yes">They are tall.</span><span class="ex no">They are talls.</span></li>
+  </ol>
+  <p class="tip">Test it: can you put <b>very</b> before the word? Very happy, very cold: adjectives. Very book? No, book is a noun.</p>
+</section>
+<section class="lsec">
+  <h3>One word, two jobs</h3>
+  <p>Some words can be a noun <b>or</b> a verb. Look at the words around them.</p>
+  <div class="pairs">
+    <p>I <span class="hl v">play</span> football. <em>verb</em></p><p>We saw a <span class="hl n">play</span> at school. <em>noun</em></p>
+    <p>They <span class="hl v">walk</span> to school. <em>verb</em></p><p>Let's go for a <span class="hl n">walk</span>. <em>noun</em></p>
+    <p>I <span class="hl v">drink</span> milk. <em>verb</em></p><p>Can I have a <span class="hl n">drink</span>? <em>noun</em></p>
+  </div>
+  <p class="tip">After <b>a / an / the</b> → a noun. After <b>I / you / we / they</b> → a verb.</p>
+</section>
+<section class="lsec">
+  <h3>Word endings that help</h3>
+  <ul class="tips">
+    <li>Nouns often end in <b>-ness</b> (happiness), <b>-tion</b> (information), <b>-ment</b> (movement), or <b>-er</b> for people (teacher, player).</li>
+    <li>Adjectives often end in <b>-ful</b> (beautiful), <b>-y</b> (sunny, funny) or <b>-ous</b> (famous).</li>
+    <li>Careful: not every <b>-ing</b> word is a verb. In “The movie is boring”, <b>boring</b> is an adjective.</li>
+  </ul>
+</section>
+</template>
+
+<template id="learn-tense">
+<section class="lsec">
+  <h3>The verb <span class="hl v">be</span>: am, is, are</h3>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th></th><th>Positive</th><th>Negative</th></tr></thead>
+    <tbody>
+      <tr><th>I</th><td>I am (I'm)</td><td>I am not (I'm not)</td></tr>
+      <tr><th>He / She / It</th><td>is (he's)</td><td>is not (isn't)</td></tr>
+      <tr><th>You / We / They</th><td>are (we're)</td><td>are not (aren't)</td></tr>
+    </tbody></table></div>
+  <p>I'm twelve years old. My dad isn't at home. We aren't tired.</p>
+  <div class="watch"><span class="wt">Watch out</span>With be, never use don't or doesn't.<br>
+    <span class="ex no">I don't hungry.</span><span class="ex no">I don't am hungry.</span><span class="ex yes">I'm not hungry.</span><br>
+    There is no “amn't”. Say <b>I'm not</b>.</div>
+</section>
+<section class="lsec">
+  <h3>Present Simple</h3>
+  <p>For things that happen <b>always, usually or every day</b>: habits, routines and facts.</p>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th></th><th>Positive</th><th>Negative</th></tr></thead>
+    <tbody>
+      <tr><th>I / You / We / They</th><td>I play</td><td>I don't play</td></tr>
+      <tr><th>He / She / It</th><td>she plays</td><td>she doesn't play</td></tr>
+    </tbody></table></div>
+  <div class="watch"><span class="wt">Watch out</span>After don't / doesn't, the verb has <b>no -s</b>.<br>
+    <span class="ex yes">She doesn't play.</span><span class="ex no">She doesn't plays.</span><span class="ex no">She don't play.</span></div>
+  <h4>Spelling with he / she / it</h4>
+  <div class="scroll"><table class="tbl kv"><tbody>
+    <tr><th>most verbs: + s</th><td>play → plays, read → reads</td></tr>
+    <tr><th>-sh, -ch, -ss, -x, -o: + es</th><td>wash → washes, watch → watches, miss → misses, fix → fixes, go → goes, do → does</td></tr>
+    <tr><th>consonant + y: y → ies</th><td>study → studies, cry → cries, fly → flies</td></tr>
+    <tr><th>vowel + y: + s</th><td>play → plays, buy → buys</td></tr>
+    <tr><th>have</th><td>have → has</td></tr>
+  </tbody></table></div>
+  <p class="tip">Time words: always, usually, often, sometimes, never, every day, every week, on Mondays, at night, twice a day.</p>
+  <p class="tip">always, usually, often, sometimes and never go <b>before</b> the main verb (She always walks to school), but <b>after</b> be (She is always late).</p>
+</section>
+<section class="lsec">
+  <h3>Present Progressive</h3>
+  <p>For things that are happening <b>now</b>, at this moment.</p>
+  <p class="formula">am / is / are + verb-ing</p>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th></th><th>Positive</th><th>Negative</th></tr></thead>
+    <tbody>
+      <tr><th>I</th><td>I'm reading.</td><td>I'm not reading.</td></tr>
+      <tr><th>He / She / It</th><td>He's sleeping.</td><td>He isn't sleeping.</td></tr>
+      <tr><th>You / We / They</th><td>They're playing.</td><td>They aren't playing.</td></tr>
+    </tbody></table></div>
+  <h4>Spelling of -ing</h4>
+  <div class="scroll"><table class="tbl kv"><tbody>
+    <tr><th>most verbs: + ing</th><td>play → playing, read → reading, study → studying</td></tr>
+    <tr><th>e at the end: drop the e</th><td>write → writing, dance → dancing, make → making</td></tr>
+    <tr><th>short verb, consonant + vowel + consonant: double the last letter</th><td>swim → swimming, run → running, sit → sitting, get → getting</td></tr>
+    <tr><th>ie → y</th><td>lie → lying</td></tr>
+  </tbody></table></div>
+  <p class="tip">Time words: now, right now, at the moment, today, this week. Also: Look! Listen! Be quiet!</p>
+  <div class="watch"><span class="wt">Watch out</span>Don't forget am / is / are, and use verb-ing after them.<br>
+    <span class="ex no">She reading a book.</span><span class="ex no">She is reads a book.</span><span class="ex yes">She is reading a book.</span></div>
+</section>
+<section class="lsec">
+  <h3>Simple or Progressive?</h3>
+  <div class="two">
+    <div><h4>Present Simple</h4><p>always, usually, every day: habits and facts</p><p><b>I walk to school every day.</b><br><b>The sun rises in the east.</b></p></div>
+    <div><h4>Present Progressive</h4><p>now, at the moment, Look!: happening right now</p><p><b>Today I'm going by bus.</b><br><b>Look! The sun is rising.</b></p></div>
+  </div>
+  <p class="demo">Dan usually <span class="hl v">plays</span> football on Fridays, but today he <span class="hl v">is playing</span> basketball.</p>
+</section>
+</template>
+
+<template id="learn-stative">
+<section class="lsec">
+  <h3>Action verbs and stative verbs</h3>
+  <p>Most verbs are <b>action verbs</b>. You can see the action: run, eat, write, swim.</p>
+  <p><b>Stative verbs</b> describe a <b>state</b>: what we think, feel, know or believe. There is no action you can see.</p>
+  <div class="keys"><span class="hl o">think</span><span class="hl o">feel</span><span class="hl o">understand</span><span class="hl o">believe</span></div>
+  <p>More stative verbs: know, like, love, hate, want, need, remember.</p>
+  <p class="tip">Quick test: can you take a photo of it? Someone running: yes, that's an action. Someone understanding: no, that's a state.</p>
+</section>
+<section class="lsec">
+  <h3>The big rule</h3>
+  <p>We <b>don't use stative verbs with -ing</b> (Present Progressive). We use the <b>Present Simple</b>, even when we talk about now!</p>
+  <div class="pairs">
+    <p><span class="ex yes">I understand the question now.</span></p><p><span class="ex no">I am understanding the question now.</span></p>
+    <p><span class="ex yes">She believes you.</span></p><p><span class="ex no">She is believing you.</span></p>
+    <p><span class="ex yes">I think it's a great idea.</span></p><p><span class="ex no">I am thinking it's a great idea.</span></p>
+    <p><span class="ex yes">He knows the answer.</span></p><p><span class="ex no">He is knowing the answer.</span></p>
+    <p><span class="ex yes">I need help right now.</span></p><p><span class="ex no">I am needing help right now.</span></p>
+  </div>
+</section>
+<section class="lsec">
+  <h3>Positive and negative</h3>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th></th><th>Positive</th><th>Negative</th></tr></thead>
+    <tbody>
+      <tr><th>I / You / We / They</th><td>I understand</td><td>I don't understand</td></tr>
+      <tr><th>He / She / It</th><td>she understands</td><td>she doesn't understand</td></tr>
+    </tbody></table></div>
+  <p>I don't understand this word. My dad doesn't believe in luck. She feels happy today.</p>
+</section>
+<section class="lsec">
+  <h3>Watch out: think and feel</h3>
+  <div class="two">
+    <div><h4>think</h4>
+      <p><b>I think</b> = I believe, it's my opinion → Present Simple.<br><span class="ex yes">I think English is fun.</span></p>
+      <p><b>think about</b> = my brain is working on it right now → -ing is OK.<br><span class="ex yes">Shh! I'm thinking about the answer.</span></p></div>
+    <div><h4>feel</h4>
+      <p>On your quiz, use the Present Simple with feel.<br><span class="ex yes">I feel tired.</span><span class="ex yes">She feels happy today.</span></p>
+      <p class="small">In everyday English you may also hear “I'm feeling tired”, but on the quiz stick to the Present Simple.</p></div>
+  </div>
+</section>
+</template>
+
+<template id="cheat">
+<section class="lsec">
+  <h3>Parts of speech</h3>
+  <ul class="tips">
+    <li><span class="hl n">noun</span> a person, animal, place, thing or idea. You can put a / the before it.</li>
+    <li><span class="hl v">verb</span> an action or a state. You can put I / they before it.</li>
+    <li><span class="hl a">adjective</span> describes a noun: before the noun (a red car) or after be (the car is red).</li>
+    <li>Adjectives never take -s: two red cars, they are tall.</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3>The verb be</h3>
+  <ul class="tips">
+    <li>I'm / I'm not</li>
+    <li>he, she, it: is / isn't</li>
+    <li>you, we, they: are / aren't</li>
+    <li>Never don't or doesn't with be: I'm not tired.</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3>Present Simple: always, usually, every day</h3>
+  <ul class="tips">
+    <li>I play, she plays</li>
+    <li>I don't play, she doesn't play (no -s after doesn't)</li>
+    <li>Spelling: watches, goes, does, studies, has, plays</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3>Present Progressive: now, at the moment, Look!</h3>
+  <ul class="tips">
+    <li>am / is / are + verb-ing: I'm reading, she's reading, they're reading</li>
+    <li>Negative: I'm not reading, she isn't reading, they aren't reading</li>
+    <li>Spelling: writing, dancing, swimming, running, sitting, lying</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3>Stative verbs</h3>
+  <ul class="tips">
+    <li><span class="hl o">think</span> <span class="hl o">feel</span> <span class="hl o">understand</span> <span class="hl o">believe</span>, and also know, like, love, hate, want, need</li>
+    <li>Always Present Simple, even with now: I understand now. She believes you.</li>
+    <li>One exception: think about = working on it now, so “I'm thinking about the answer” is OK.</li>
+  </ul>
+</section>
+<section class="lsec">
+  <h3>Top mistakes</h3>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th>Wrong</th><th>Right</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ex no">She don't like it.</span></td><td><span class="ex yes">She doesn't like it.</span></td></tr>
+      <tr><td><span class="ex no">He doesn't plays.</span></td><td><span class="ex yes">He doesn't play.</span></td></tr>
+      <tr><td><span class="ex no">I don't tired.</span></td><td><span class="ex yes">I'm not tired.</span></td></tr>
+      <tr><td><span class="ex no">She reading now.</span></td><td><span class="ex yes">She is reading now.</span></td></tr>
+      <tr><td><span class="ex no">I am understanding.</span></td><td><span class="ex yes">I understand.</span></td></tr>
+      <tr><td><span class="ex no">a car red</span></td><td><span class="ex yes">a red car</span></td></tr>
+      <tr><td><span class="ex no">They are talls.</span></td><td><span class="ex yes">They are tall.</span></td></tr>
+    </tbody></table></div>
+</section>
+</template>
+
+<script>
+(function () {
+"use strict";
+// ===== Content and answer checking (no DOM) =====
+const TOPICS = {
+  pos: {title: "Parts of Speech", sub: "Nouns, verbs and adjectives", cls: "t-pos"},
+  tense: {title: "Present Simple & Progressive", sub: "Positive and negative, and the verb be", cls: "t-tense"},
+  stative: {title: "Stative Verbs", sub: "think, feel, understand, believe", cls: "t-stat"}
+};
+const TORDER = ["pos", "tense", "stative"];
+const TEST_MCQ = 5, TEST_WR = 3; // per topic
+const HW = "What part of speech is the highlighted word?";
+const NVA = ["noun", "verb", "adjective"];
+const CH = "Choose the correct answer.";
+
+const MCQ = [
+// ---------- Parts of Speech: practice ----------
+{id:"pm1", t:"pos", set:"p", q:"Which word is a noun?", o:["run","happy","garden","blue"], a:2,
+ e:"**Garden** is a place, so it is a noun. Run is a verb. Happy and blue are adjectives."},
+{id:"pm2", t:"pos", set:"p", s:"My little brother **sleeps** a lot.", q:HW, o:NVA, a:1,
+ e:"**Sleeps** tells us what the brother does, so it is a verb."},
+{id:"pm3", t:"pos", set:"p", s:"We have a **new** teacher.", q:HW, o:NVA, a:2,
+ e:"**New** describes the noun teacher. What kind of teacher? A new one. Words that describe nouns are adjectives."},
+{id:"pm4", t:"pos", set:"p", q:"Which sentence is correct?", o:["I have a dog black.","I have a black dog.","I have black a dog.","I have a dog blacks."], a:1,
+ e:"In English the adjective comes **before** the noun: a **black dog**. And adjectives never take -s."},
+{id:"pm5", t:"pos", set:"p", q:"Which sentence is correct?", o:["They are happys.","They are happy.","They happy are.","They are happies."], a:1,
+ e:"Adjectives don't change for plural. One girl is happy, two girls are **happy**. No -s!"},
+{id:"pm6", t:"pos", set:"p", s:"Dana reads books every evening.", q:"How many nouns are in this sentence?", o:["1","2","3","4"], a:2,
+ e:"There are 3 nouns: **Dana** (a person), **books** (things) and **evening** (a time). Reads is a verb."},
+{id:"pm7", t:"pos", set:"p", q:"Which group has only verbs?", o:["swim, jump, write","table, sing, red","happy, eat, tall","girl, dog, park"], a:0,
+ e:"**Swim, jump and write** are all actions, so they are verbs. Table, girl, dog and park are nouns. Red, happy and tall are adjectives."},
+{id:"pm8", t:"pos", set:"p", q:"Which group has only adjectives?", o:["big, funny, cold","cat, small, run","school, teacher, book","play, sad, sit"], a:0,
+ e:"**Big, funny and cold** all describe nouns: a big house, a funny movie, a cold day."},
+{id:"pm9", t:"pos", set:"p", s:"The **dance** at the party was great.", q:HW, o:NVA, a:0,
+ e:"Here **dance** comes after the. It is a thing, so it is a noun. In “I dance every day” it is a verb."},
+{id:"pm10", t:"pos", set:"p", s:"I usually **walk** to school.", q:HW, o:NVA, a:1,
+ e:"**Walk** comes after I and tells us what I do, so here it is a verb. In “Let's go for a walk” it is a noun."},
+{id:"pm11", t:"pos", set:"p", s:"It's very ___ today. Let's go to the beach.", q:"Which word completes the sentence?", o:["sun","hot","swim","summer"], a:1,
+ e:"After **very** we need an adjective: very **hot**. Sun and summer are nouns, and swim is a verb."},
+{id:"pm12", t:"pos", set:"p", q:"Which word is NOT a noun?", o:["friendship","apple","beautiful","London"], a:2,
+ e:"**Beautiful** is an adjective. It describes a noun: a beautiful city. Friendship is an idea, apple is a thing and London is a place."},
+{id:"pm13", t:"pos", set:"p", s:"The children play in the park after school.", q:"Which word is a verb?", o:["children","play","park","school"], a:1,
+ e:"**Play** is what the children do, so it is a verb. Children, park and school are nouns."},
+{id:"pm14", t:"pos", set:"p", q:"Which sentence has an adjective?", o:["The cat sleeps.","The cat is sleeping.","The cat is hungry.","The cat eats fish."], a:2,
+ e:"**Hungry** describes the cat, so it is an adjective. It comes after is (the verb be)."},
+
+// ---------- Present Simple & Progressive: practice ----------
+{id:"tm1", t:"tense", set:"p", s:"My sister ___ to music every evening.", o:["listen","listens","is listen","listening"], a:1,
+ e:"**Every evening** is a habit, so we use the Present Simple. My sister = she, so we add -s: **listens**."},
+{id:"tm2", t:"tense", set:"p", s:"Look! The baby ___.", o:["sleeps","sleep","is sleeping","are sleeping"], a:2,
+ e:"**Look!** tells us it is happening now, so we use the Present Progressive. The baby = it: **is sleeping**."},
+{id:"tm3", t:"tense", set:"p", s:"I ___ hungry. I don't want to eat now.", o:["am not","don't","isn't","not"], a:0,
+ e:"Hungry is not a verb, so we need be. With I: **am not** (I'm not). We never say “I don't hungry”."},
+{id:"tm4", t:"tense", set:"p", s:"They ___ from Haifa. They're from Eilat.", o:["aren't","isn't","don't","not are"], a:0,
+ e:"They + are not = **aren't**. Isn't is for he, she and it."},
+{id:"tm5", t:"tense", set:"p", s:"Tom ___ coffee. He only drinks tea.", o:["don't drink","doesn't drink","doesn't drinks","isn't drink"], a:1,
+ e:"Tom = he, so we use **doesn't**. After doesn't the verb has no -s: **doesn't drink**."},
+{id:"tm6", t:"tense", set:"p", s:"Be quiet! The students ___ a test.", o:["write","writes","are writing","is writing"], a:2,
+ e:"**Be quiet!** means it is happening now. The students = they: **are writing** (write → writing, drop the e)."},
+{id:"tm7", t:"tense", set:"p", q:"Which sentence is correct?", o:["She don't like pizza.","She doesn't likes pizza.","She doesn't like pizza.","She not like pizza."], a:2,
+ e:"He / she / it + **doesn't** + verb with no -s: She **doesn't like** pizza."},
+{id:"tm8", t:"tense", set:"p", s:"We ___ TV right now. We're doing our homework.", o:["don't watch","aren't watching","isn't watching","not watching"], a:1,
+ e:"**Right now** → Present Progressive. The negative with we: **aren't watching**."},
+{id:"tm9", t:"tense", set:"p", s:"He ___ in the pool.", o:["is swiming","is swimming","is swimeing","are swimming"], a:1,
+ e:"swim → **swimming**: it is a short verb that ends consonant + vowel + consonant, so we double the m. With he we use is."},
+{id:"tm10", t:"tense", set:"p", s:"My dad ___ the dishes every night.", o:["washs","washes","is washing","wash"], a:1,
+ e:"**Every night** → Present Simple. Wash ends in -sh, so we add -es: **washes**."},
+{id:"tm11", t:"tense", set:"p", s:"Dana and I ___ in the same class.", o:["am","is","are","be"], a:2,
+ e:"Dana and I = we, so we use **are**."},
+{id:"tm12", t:"tense", set:"p", s:"Noa usually walks to school, but today she ___ the bus.", o:["takes","is taking","take","taking"], a:1,
+ e:"**Usually** → Present Simple (walks). **Today** is different, it is happening now: **is taking**."},
+{id:"tm13", t:"tense", set:"p", s:"The sun always ___ in the east.", o:["rise","rises","is rising","rising"], a:1,
+ e:"This is a fact. It is always true, so we use the Present Simple. The sun = it: **rises**."},
+{id:"tm14", t:"tense", set:"p", s:"Shira ___ English and math every day.", o:["studys","studies","studyes","study"], a:1,
+ e:"Study ends in consonant + y, so y → ies: **studies**."},
+{id:"tm15", t:"tense", set:"p", s:"My brothers ___ football on Saturdays. They prefer basketball.", o:["doesn't play","don't play","aren't play","not play"], a:1,
+ e:"My brothers = they, so we use **don't** + verb: **don't play**."},
+
+// ---------- Stative Verbs: practice ----------
+{id:"sm1", t:"stative", set:"p", s:"I ___ the question. Can you explain it again?", o:["don't understand","am not understanding","not understand","doesn't understand"], a:0,
+ e:"**Understand** is a stative verb, so we use the Present Simple. With I: **don't understand**."},
+{id:"sm2", t:"stative", set:"p", s:"She ___ in ghosts.", o:["is believing","believes","believe","believing"], a:1,
+ e:"**Believe** is a stative verb → Present Simple. She → believe + s: **believes**."},
+{id:"sm3", t:"stative", set:"p", s:"I ___ this book is boring.", o:["am thinking","think","thinks","thinking"], a:1,
+ e:"Here think = my opinion. That is a state → Present Simple: I **think**."},
+{id:"sm4", t:"stative", set:"p", q:"Which sentence is correct?", o:["I am understanding you now.","I understand you now.","I understanding you now.","I understands you now."], a:1,
+ e:"Even with **now**, stative verbs stay in the Present Simple: I **understand** you now."},
+{id:"sm5", t:"stative", set:"p", s:"My little brother ___ scared at night.", o:["feel","feels","feeling","is feel"], a:1,
+ e:"**Feel** is on your stative list → Present Simple. My little brother = he: **feels**."},
+{id:"sm6", t:"stative", set:"p", s:"We ___ you. You always tell the truth.", o:["believe","are believing","believes","doesn't believe"], a:0,
+ e:"Believe → Present Simple. With we: **believe** (no -s). We don't say “are believing”."},
+{id:"sm7", t:"stative", set:"p", q:"Which verb is a stative verb?", o:["run","understand","write","jump"], a:1,
+ e:"You can see someone run, write or jump. Those are actions. **Understand** happens in your head, so it is a state."},
+{id:"sm8", t:"stative", set:"p", q:"Which group has only stative verbs?", o:["think, believe, know","eat, swim, understand","feel, play, run","jump, write, believe"], a:0,
+ e:"**Think, believe and know** are all states of the mind. Eat, swim, play, run, jump and write are actions."},
+{id:"sm9", t:"stative", set:"p", s:"Dan ___ that the test is easy.", o:["isn't thinking","doesn't think","don't think","not thinks"], a:1,
+ e:"Think = opinion → Present Simple. Dan = he: **doesn't think** (no -s after doesn't)."},
+{id:"sm10", t:"stative", set:"p", tricky:true, s:"Shh! I ___ about my answer.", o:["think","am thinking","thinks","thinking"], a:1,
+ e:"Here **think about** means my brain is working on it right now. That is an action, so -ing is OK: I **am thinking** about my answer. Compare: I think (= I believe) the answer is B."},
+{id:"sm11", t:"stative", set:"p", s:"Rina ___ the answer to this question.", o:["knows","is knowing","know","knowing"], a:0,
+ e:"**Know** is a stative verb too → Present Simple. Rina = she: **knows**."},
+{id:"sm12", t:"stative", set:"p", s:"The children ___ their new teacher. She's very nice.", o:["are liking","likes","like","liking"], a:2,
+ e:"**Like** is a stative verb → Present Simple. The children = they: **like**."},
+{id:"sm13", t:"stative", set:"p", s:"I ___ well today. I have a headache.", o:["don't feel","am not feel","doesn't feel","not feel"], a:0,
+ e:"Feel → Present Simple. The negative with I: **don't feel**."},
+{id:"sm14", t:"stative", set:"p", q:"Which sentence is NOT correct?", o:["She believes her best friend.","I think you're right.","He is understanding the lesson.","We feel happy."], a:2,
+ e:"**Understand** is a stative verb, so we don't use -ing. Correct: He **understands** the lesson."},
+
+// ---------- Final test pool: Parts of Speech ----------
+{id:"xpm1", t:"pos", set:"t", s:"The **tall** girl sings in the choir.", q:HW, o:NVA, a:2,
+ e:"**Tall** describes the girl, so it is an adjective."},
+{id:"xpm2", t:"pos", set:"t", s:"My friends **play** basketball after school.", q:HW, o:NVA, a:1,
+ e:"**Play** is what my friends do, so it is a verb."},
+{id:"xpm3", t:"pos", set:"t", s:"Can I have a **drink**, please?", q:HW, o:NVA, a:0,
+ e:"After **a**, drink is a thing, so here it is a noun. In “I drink water” it is a verb."},
+{id:"xpm4", t:"pos", set:"t", q:"Which sentence is correct?", o:["We live in a house big.","We live in a big house.","We live in big a house.","We live in a bigs house."], a:1,
+ e:"The adjective comes before the noun: a **big house**."},
+{id:"xpm5", t:"pos", set:"t", q:"Which word is an adjective?", o:["kitchen","eat","delicious","food"], a:2,
+ e:"**Delicious** describes food: delicious food. Kitchen and food are nouns, and eat is a verb."},
+{id:"xpm6", t:"pos", set:"t", q:"Which word is a verb?", o:["beautiful","write","window","teacher"], a:1,
+ e:"**Write** is an action, so it is a verb."},
+{id:"xpm7", t:"pos", set:"t", s:"Yossi has three ___ cats.", o:["blacks","black","blackes","a black"], a:1,
+ e:"Adjectives never take -s: three **black** cats."},
+{id:"xpm8", t:"pos", set:"t", s:"**Happiness** is important.", q:HW, o:NVA, a:0,
+ e:"**Happiness** is an idea, so it is a noun. Words that end in -ness are usually nouns. Happy is the adjective."},
+{id:"xpm9", t:"pos", set:"t", s:"The old dog sleeps under the table.", q:"Which word is NOT a noun?", o:["dog","old","table"], a:1,
+ e:"**Old** describes the dog, so it is an adjective. Dog and table are nouns."},
+{id:"xpm10", t:"pos", set:"t", s:"Michal and Dan are good friends.", q:"How many nouns are in this sentence?", o:["1","2","3","4"], a:2,
+ e:"**Michal**, **Dan** and **friends**: 3 nouns. Good is an adjective and are is a verb."},
+
+// ---------- Final test pool: Present Simple & Progressive ----------
+{id:"xtm1", t:"tense", set:"t", s:"My parents ___ coffee every morning.", o:["drinks","drink","are drinking","drinking"], a:1,
+ e:"**Every morning** → Present Simple. My parents = they: **drink** (no -s)."},
+{id:"xtm2", t:"tense", set:"t", s:"Listen! Somebody ___ at the door.", o:["knocks","is knocking","knock","are knocking"], a:1,
+ e:"**Listen!** → it is happening now: **is knocking**."},
+{id:"xtm3", t:"tense", set:"t", s:"I ___ twelve years old.", o:["is","am","are","be"], a:1,
+ e:"With I we use **am** (I'm)."},
+{id:"xtm4", t:"tense", set:"t", s:"Roni ___ her room on weekends, so it's always messy.", o:["doesn't clean","don't clean","doesn't cleans","isn't clean"], a:0,
+ e:"Roni = she: **doesn't clean** (no -s after doesn't)."},
+{id:"xtm5", t:"tense", set:"t", s:"We ___ a movie at the moment, so we can't talk.", o:["watch","watches","is watching","are watching"], a:3,
+ e:"**At the moment** → Present Progressive. With we: **are watching**."},
+{id:"xtm6", t:"tense", set:"t", s:"The pool ___ cold in the summer.", o:["isn't","aren't","doesn't","don't"], a:0,
+ e:"Cold is not a verb, so we use be. The pool = it: **isn't**."},
+{id:"xtm7", t:"tense", set:"t", q:"Which sentence is correct?", o:["He is plays the guitar now.","He playing the guitar now.","He is playing the guitar now.","He are playing the guitar now."], a:2,
+ e:"Now → am / is / are + verb-ing. With he: **is playing**."},
+{id:"xtm8", t:"tense", set:"t", s:"My cat ___ fish. It only eats chicken.", o:["doesn't eat","isn't eat","don't eat","doesn't eats"], a:0,
+ e:"My cat = it: **doesn't eat**."},
+{id:"xtm9", t:"tense", set:"t", s:"Look! Dad ___ the car.", o:["washes","is washing","wash","washing"], a:1,
+ e:"**Look!** → it is happening now: **is washing**."},
+{id:"xtm10", t:"tense", set:"t", s:"Shira ___ her teeth twice a day.", o:["brushs","brush","brushes","is brushing"], a:2,
+ e:"**Twice a day** → Present Simple. Brush ends in -sh, so: **brushes**."},
+{id:"xtm11", t:"tense", set:"t", s:"The boys ___ football right now. They're at the cinema.", o:["don't play","aren't playing","isn't playing","not playing"], a:1,
+ e:"**Right now** → Present Progressive. The negative with they: **aren't playing**."},
+{id:"xtm12", t:"tense", set:"t", s:"You ___ late! The lesson starts at 8:00 and now it's 8:15.", o:["are","is","am","do"], a:0,
+ e:"With you we use **are**: You're late!"},
+
+// ---------- Final test pool: Stative Verbs ----------
+{id:"xsm1", t:"stative", set:"t", s:"I ___ what you mean.", o:["understand","am understanding","understands","understanding"], a:0,
+ e:"**Understand** is a stative verb → Present Simple: I **understand**."},
+{id:"xsm2", t:"stative", set:"t", s:"My brother ___ in magic.", o:["is believing","believes","believe","don't believe"], a:1,
+ e:"**Believe** → Present Simple. My brother = he: **believes**."},
+{id:"xsm3", t:"stative", set:"t", s:"___ you're right.", o:["I think","I am thinking","I thinks","I thinking"], a:0,
+ e:"This is an opinion → Present Simple: **I think** you're right."},
+{id:"xsm4", t:"stative", set:"t", s:"She ___ the new song. She sings it all day!", o:["is liking","likes","like","liking"], a:1,
+ e:"**Like** is a stative verb → Present Simple. With she: **likes**."},
+{id:"xsm5", t:"stative", set:"t", s:"We ___ the answer. Can you help us?", o:["don't know","aren't knowing","doesn't know","not know"], a:0,
+ e:"**Know** is a stative verb → Present Simple. With we: **don't know**."},
+{id:"xsm6", t:"stative", set:"t", q:"Which sentence is correct?", o:["He is believing his teacher.","He believing his teacher.","He believes his teacher.","He believe his teacher."], a:2,
+ e:"Believe → Present Simple. With he: **believes**."},
+{id:"xsm7", t:"stative", set:"t", q:"Which verb is NOT a stative verb?", o:["believe","understand","swim","know"], a:2,
+ e:"**Swim** is an action you can see. Believe, understand and know are states."},
+{id:"xsm8", t:"stative", set:"t", s:"Noa ___ sick today, so she's at home.", o:["feels","feel","is feel","feeling"], a:0,
+ e:"**Feel** → Present Simple. Noa = she: **feels**."},
+{id:"xsm9", t:"stative", set:"t", s:"They ___ that English is difficult.", o:["don't think","doesn't think","aren't thinking","not think"], a:0,
+ e:"Think = opinion → Present Simple. With they: **don't think**."},
+{id:"xsm10", t:"stative", set:"t", s:"I ___ a new phone. Mine is broken.", o:["need","am needing","needs","needing"], a:0,
+ e:"**Need** is a stative verb → Present Simple: I **need**."}
+];
+
+// Writing kinds: pos (write noun/verb/adjective), find (write all the nouns/adjectives),
+// fill (complete with the verb in brackets), neg (write in the negative), fix (correct the mistake),
+// order (put the words in order), free (own sentences: AI teacher or self-check)
+const WR = [
+// ---------- Parts of Speech: practice ----------
+{id:"pw1", t:"pos", set:"p", k:"pos", s:"The old man **feeds** the birds every morning.", a:["verb"],
+ e:"**Feeds** is what the man does. It is an action, so it is a verb."},
+{id:"pw2", t:"pos", set:"p", k:"pos", s:"I love your new **bag**.", a:["noun"],
+ e:"**Bag** is a thing, so it is a noun. It comes after the adjective new: a new bag."},
+{id:"pw3", t:"pos", set:"p", k:"pos", s:"This movie is really **boring**.", a:["adjective"],
+ e:"**Boring** describes the movie, so it is an adjective. Not every -ing word is a verb!"},
+{id:"pw4", t:"pos", set:"p", k:"fix", s:"My mother has a car red.", a:["My mother has a red car."],
+ e:"The adjective comes before the noun: a **red car**."},
+{id:"pw5", t:"pos", set:"p", k:"fix", s:"I have two blues pens.", a:["I have two blue pens."],
+ e:"Adjectives never take -s: two **blue** pens."},
+{id:"pw6", t:"pos", set:"p", k:"find", f:"adjectives", s:"My sister has long brown hair.", a:["long","brown"],
+ e:"**Long** and **brown** describe the noun hair. Sister and hair are nouns, and has is a verb."},
+{id:"pw7", t:"pos", set:"p", k:"find", f:"nouns", s:"The teacher gives the students a test.", a:["teacher","students","test"],
+ e:"**Teacher**, **students** and **test** are nouns (people and a thing). Gives is a verb."},
+{id:"pw8", t:"pos", set:"p", k:"order", w:["lives","in","a","house","Tamar","small"], a:["Tamar lives in a small house."],
+ e:"The adjective small comes before the noun house: **a small house**."},
+{id:"pw9", t:"pos", set:"p", k:"free", q:"Write a sentence about your room. Use two adjectives.",
+ g:"two adjectives, used correctly (before a noun, or after am / is / are), with no -s on the adjectives",
+ m:"I have a small room with a big window.",
+ c:["Did you use two adjectives?","Is each adjective before its noun (a big window) or after be (is small)?","No -s on the adjectives?"]},
+{id:"pw10", t:"pos", set:"p", k:"free", q:"Write a sentence about your best friend. Use an adjective before a noun, like “a funny girl”.",
+ g:"an adjective that comes before a noun",
+ m:"My best friend is a kind and funny girl.",
+ c:["Is there an adjective right before a noun?","Did you start with a capital letter and end with a full stop?"]},
+
+// ---------- Present Simple & Progressive: practice ----------
+{id:"tw1", t:"tense", set:"p", k:"fill", s:"My mother ___ (go) to work by bus every day.", a:["goes"],
+ e:"**Every day** → Present Simple. My mother = she: go → **goes** (add -es after o)."},
+{id:"tw2", t:"tense", set:"p", k:"fill", s:"Listen! Somebody ___ (sing) in the garden.", a:["is singing","'s singing"],
+ e:"**Listen!** → it is happening now → Present Progressive: somebody **is singing**."},
+{id:"tw3", t:"tense", set:"p", k:"fill", s:"He ___ (not / eat) meat. He's a vegetarian.", a:["doesn't eat"],
+ e:"He → **doesn't** + verb with no -s: **doesn't eat**."},
+{id:"tw4", t:"tense", set:"p", k:"fill", s:"I ___ (not / be) at school today. I'm at home with a cold.", a:["am not","'m not"],
+ e:"With be we don't use don't. With I: **am not** (I'm not)."},
+{id:"tw5", t:"tense", set:"p", k:"fill", s:"Look! The children ___ (swim) in the sea.", a:["are swimming","'re swimming"],
+ e:"**Look!** → now → Present Progressive. The children = they: **are swimming** (double the m)."},
+{id:"tw6", t:"tense", set:"p", k:"neg", s:"The children are sleeping.", a:["The children aren't sleeping."],
+ e:"Present Progressive negative: are + not + verb-ing → The children **aren't sleeping**."},
+{id:"tw7", t:"tense", set:"p", k:"neg", s:"My friend likes horror movies.", a:["My friend doesn't like horror movies."],
+ e:"Present Simple negative: **doesn't** + verb with no -s → My friend **doesn't like** horror movies."},
+{id:"tw8", t:"tense", set:"p", k:"neg", s:"We are late for school.", a:["We aren't late for school."],
+ e:"The verb be: are + not → We **aren't** late for school (or We're not late)."},
+{id:"tw9", t:"tense", set:"p", k:"fix", s:"She is play tennis now.", a:["She is playing tennis now."],
+ e:"After is we need verb-ing: She is **playing** tennis now."},
+{id:"tw10", t:"tense", set:"p", k:"fix", s:"I don't tired today.", a:["I am not tired today."],
+ e:"Tired is not a verb, so we use be: **I'm not** tired today. Never “I don't tired”."},
+{id:"tw11", t:"tense", set:"p", k:"fix", s:"My brother don't play the piano.", a:["My brother doesn't play the piano."],
+ e:"My brother = he: **doesn't** play."},
+{id:"tw12", t:"tense", set:"p", k:"free", q:"Write two sentences about yourself: one thing you do every weekend (Present Simple), and one thing you are doing right now (Present Progressive).",
+ g:"one Present Simple sentence about a habit and one Present Progressive sentence about now",
+ m:"I visit my grandparents every weekend. Right now I'm studying for my English quiz.",
+ c:["Sentence 1 is in the Present Simple. With he / she / it, did you add -s?","Sentence 2 has am / is / are + verb-ing.","Check the -ing spelling (writing, swimming)."]},
+{id:"tw13", t:"tense", set:"p", k:"free", q:"It's Saturday morning at home. Write two sentences about two people in your family: what are they doing right now? Make one sentence positive and one negative.",
+ g:"Present Progressive: one positive sentence and one negative sentence (isn't / aren't + verb-ing)",
+ m:"My dad is making breakfast. My sister isn't sleeping, she's reading a book.",
+ c:["Did you use am / is / are + verb-ing?","Is one sentence negative (isn't / aren't + verb-ing)?"]},
+
+// ---------- Stative Verbs: practice ----------
+{id:"sw1", t:"stative", set:"p", k:"fill", s:"I ___ (not / understand) this word. What does it mean?", a:["don't understand"],
+ e:"**Understand** is stative → Present Simple. With I: **don't understand**."},
+{id:"sw2", t:"stative", set:"p", k:"fill", s:"My dad ___ (believe) that sport is important.", a:["believes"],
+ e:"**Believe** → Present Simple. My dad = he: **believes**."},
+{id:"sw3", t:"stative", set:"p", k:"fill", s:"Maya ___ (not / feel) well today. She has a cold.", a:["doesn't feel"],
+ al:[["isn't feeling","People do say this in everyday English, but feel is on your stative list. On the quiz, write: doesn't feel."]],
+ e:"**Feel** → Present Simple. Maya = she: **doesn't feel**."},
+{id:"sw4", t:"stative", set:"p", k:"fill", s:"I ___ (think) you're right.", a:["think"],
+ e:"Think = my opinion → Present Simple: I **think** you're right."},
+{id:"sw5", t:"stative", set:"p", k:"neg", s:"She understands Spanish.", a:["She doesn't understand Spanish."],
+ e:"She → **doesn't** + verb with no -s: She **doesn't understand** Spanish."},
+{id:"sw6", t:"stative", set:"p", k:"fix", s:"I am believing you.", a:["I believe you."],
+ e:"**Believe** is stative, so no -ing: I **believe** you."},
+{id:"sw7", t:"stative", set:"p", k:"fix", s:"He is knowing the answer.", a:["He knows the answer."],
+ e:"**Know** is stative → Present Simple: He **knows** the answer."},
+{id:"sw8", t:"stative", set:"p", k:"fix", s:"My friends are thinking that the movie is funny.", a:["My friends think that the movie is funny.","My friends think the movie is funny."],
+ e:"Think = opinion → Present Simple: My friends **think** that the movie is funny."},
+{id:"sw9", t:"stative", set:"p", k:"fix", s:"Right now I am wanting a cold drink.", a:["Right now I want a cold drink."],
+ e:"**Want** is stative. Even with right now, we use the Present Simple: I **want** a cold drink."},
+{id:"sw10", t:"stative", set:"p", k:"free", q:"Write two sentences about yourself. Start one with “I think…” and the other with “I don't understand…”.",
+ g:"the stative verbs think and understand in the Present Simple (one positive, one negative)",
+ m:"I think English is a fun subject. I don't understand why we have so much homework!",
+ c:["Did you write I think (not I am thinking)?","Did you write I don't understand (not I am not understanding)?"]},
+{id:"sw11", t:"stative", set:"p", k:"free", q:"Your friend is sad because she lost her phone. Write two sentences to her. Use the verbs understand and feel.",
+ g:"the stative verbs understand and feel in the Present Simple",
+ m:"I understand how you feel. I feel sad too when I lose things.",
+ c:["Did you use understand and feel in the Present Simple?","With he / she, did you add -s (feels, understands)?"]},
+
+// ---------- Final test pool: Parts of Speech ----------
+{id:"xpw1", t:"pos", set:"t", k:"pos", s:"The children **laugh** at the clown.", a:["verb"],
+ e:"**Laugh** is what the children do, so it is a verb."},
+{id:"xpw2", t:"pos", set:"t", k:"pos", s:"It's a **wonderful** day!", a:["adjective"],
+ e:"**Wonderful** describes the day, so it is an adjective. Words that end in -ful are often adjectives."},
+{id:"xpw3", t:"pos", set:"t", k:"fix", s:"My brother has a bike new.", a:["My brother has a new bike."],
+ e:"The adjective comes before the noun: a **new bike**."},
+{id:"xpw4", t:"pos", set:"t", k:"find", f:"adjectives", s:"I have a small brown dog.", a:["small","brown"],
+ e:"**Small** and **brown** describe the dog."},
+{id:"xpw5", t:"pos", set:"t", k:"order", w:["has","a","cat","Dana","white"], a:["Dana has a white cat."],
+ e:"The adjective comes before the noun: **a white cat**."},
+{id:"xpw6", t:"pos", set:"t", k:"fix", s:"They are smarts students.", a:["They are smart students."],
+ e:"Adjectives never take -s: **smart** students."},
+{id:"xpw7", t:"pos", set:"t", k:"find", f:"nouns", s:"Dana eats an apple in the kitchen.", a:["Dana","apple","kitchen"],
+ e:"**Dana** (a person), **apple** (a thing) and **kitchen** (a place) are nouns."},
+
+// ---------- Final test pool: Present Simple & Progressive ----------
+{id:"xtw1", t:"tense", set:"t", k:"fill", s:"My best friend ___ (live) near the beach.", a:["lives"],
+ e:"Present Simple with he / she: **lives**."},
+{id:"xtw2", t:"tense", set:"t", k:"fill", s:"Look! The dog ___ (run) after the ball.", a:["is running","'s running"],
+ e:"**Look!** → now → Present Progressive: **is running** (double the n)."},
+{id:"xtw3", t:"tense", set:"t", k:"fill", s:"I ___ (not / be) ready yet. Wait for me!", a:["am not","'m not"],
+ e:"The verb be in the negative: I **am not** (I'm not) ready."},
+{id:"xtw4", t:"tense", set:"t", k:"neg", s:"Danny watches TV every evening.", a:["Danny doesn't watch TV every evening."],
+ e:"Danny **doesn't watch** TV. After doesn't, the verb has no -es."},
+{id:"xtw5", t:"tense", set:"t", k:"neg", s:"We are playing a game now.", a:["We aren't playing a game now."],
+ e:"are + not + verb-ing: We **aren't playing** a game now (or We're not playing)."},
+{id:"xtw6", t:"tense", set:"t", k:"fix", s:"My sister don't like vegetables.", a:["My sister doesn't like vegetables."],
+ e:"My sister = she: **doesn't** like."},
+{id:"xtw7", t:"tense", set:"t", k:"fix", s:"They is dancing at the party.", a:["They are dancing at the party."],
+ e:"With they we use **are**: They **are** dancing."},
+{id:"xtw8", t:"tense", set:"t", k:"fill", s:"Every summer, my uncle ___ (go) to Eilat.", a:["goes"],
+ e:"**Every summer** → Present Simple. My uncle = he: **goes**."},
+
+// ---------- Final test pool: Stative Verbs ----------
+{id:"xsw1", t:"stative", set:"t", k:"fill", s:"I ___ (not / believe) his story.", a:["don't believe"],
+ e:"**Believe** → Present Simple: I **don't believe** his story."},
+{id:"xsw2", t:"stative", set:"t", k:"fill", s:"Gal ___ (understand) French very well.", a:["understands"],
+ e:"**Understand** → Present Simple. Gal = he or she: **understands**."},
+{id:"xsw3", t:"stative", set:"t", k:"fix", s:"We are knowing the answer.", a:["We know the answer."],
+ e:"**Know** is stative: We **know** the answer."},
+{id:"xsw4", t:"stative", set:"t", k:"fix", s:"She is understanding the homework now.", a:["She understands the homework now."],
+ e:"Even with now: She **understands** the homework now."},
+{id:"xsw5", t:"stative", set:"t", k:"neg", s:"My dad thinks the movie is funny.", a:["My dad doesn't think the movie is funny.","My dad doesn't think that the movie is funny."],
+ e:"My dad **doesn't think**. After doesn't, the verb has no -s."},
+{id:"xsw6", t:"stative", set:"t", k:"fill", s:"At the moment, my sister ___ (want) a new bike.", a:["wants"],
+ e:"**Want** is stative. Even with at the moment, we use the Present Simple: she **wants**."}
+];
+
+// ---------- answer checking ----------
+const APOS = /[‘’‛ʼ`´′]/g;
+function base(s) {
+  return String(s == null ? "" : s).toLowerCase()
+    .replace(APOS, "'")
+    .replace(/[“”„"]/g, " ")
+    .replace(/[.,!?;:()\[\]–—…]/g, " ")
+    .replace(/\s+/g, " ").trim();
+}
+const EXP = [
+  [/\bdoesn't\b/g, "does not"], [/\bdon't\b/g, "do not"], [/\bisn't\b/g, "is not"], [/\baren't\b/g, "are not"],
+  [/\bcan't\b/g, "cannot"], [/\bwon't\b/g, "will not"], [/\bdidn't\b/g, "did not"], [/\bwasn't\b/g, "was not"],
+  [/\bweren't\b/g, "were not"], [/\bhaven't\b/g, "have not"], [/\bhasn't\b/g, "has not"],
+  [/\bi'm\b/g, "i am"], [/\b(you|we|they)'re\b/g, "$1 are"],
+  [/\b(he|she|it|that|there|what|who|somebody|someone|everybody|everyone|nobody)'s\b/g, "$1 is"],
+  [/\b([a-z]+)'s (not|[a-z]+ing)\b/g, "$1 is $2"],
+  [/(^|\s)'m\b/g, "$1am"], [/(^|\s)'re\b/g, "$1are"], [/(^|\s)'s\b/g, "$1is"],
+  [/\bcan not\b/g, "cannot"]
+];
+function full(s) {
+  let x = base(s);
+  for (const [r, v] of EXP) x = x.replace(r, v);
+  x = x.replace(/(^|\s)'+/g, "$1").replace(/'+(?=\s|$)/g, "");
+  return x.replace(/\s+/g, " ").trim();
+}
+function noApos(x) {
+  return x.replace(/\bdoesnt\b/g, "does not").replace(/\bdont\b/g, "do not").replace(/\bisnt\b/g, "is not")
+    .replace(/\barent\b/g, "are not").replace(/\bim\b/g, "i am");
+}
+function shuffle(a) {
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function keepOrder(q) { return q.o === NVA || q.o.every(x => /^\d+$/.test(x)); }
+function lev(a, b) {
+  const m = a.length, n = b.length; let p = Array.from({length: n + 1}, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const c = [i];
+    for (let j = 1; j <= n; j++) c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    p = c;
+  }
+  return p[n];
+}
+// the sentence of a fill item with the blank filled in (hint in brackets removed)
+function filled(q, ans) { return q.s.replace(/\s*\([^)]*\)/g, "").replace("___", ans); }
+function fillVariants(q, ans) {
+  const out = [ans];
+  const pre = q.s.split("___")[0];
+  const clause = (pre.match(/[^.!?]*$/) || [""])[0];
+  out.push(pre + " " + ans, clause + " " + ans, clause.split(",").pop() + " " + ans);
+  const sent = filled(q, ans);
+  out.push(sent);
+  const parts = q.s.replace(/\s*\([^)]*\)/g, "").match(/[^.!?]+[.!?]*/g) || [];
+  const withBlank = parts.find(p => p.indexOf("___") >= 0);
+  if (withBlank) out.push(withBlank.replace("___", ans));
+  return out;
+}
+const STOP = ["and", "the", "a", "an", "is", "are", "am", "it", "its"];
+function wordsOf(s) { return base(s).replace(/'s\b/g, "").replace(/'/g, "").split(/[\s\/&+]+/).filter(w => w && STOP.indexOf(w) < 0); }
+function stem(w) { return w.length > 3 && w.slice(-1) === "s" ? w.slice(0, -1) : w; }
+
+function checkPos(q, raw) {
+  const x = base(raw).replace(/^(it is|it's|its|this is|is)\s+/, "").replace(/^(a|an|the)\s+/, "").trim();
+  const t = q.a[0];
+  const syn = {noun: ["noun", "nouns", "n"], verb: ["verb", "verbs", "v"], adjective: ["adjective", "adjectives", "adj"]};
+  if (syn[t].indexOf(x) >= 0) return {st: "correct"};
+  if (x.length > 2 && lev(x, t) <= (t === "adjective" ? 2 : 1)) return {st: "almost", note: "Check your spelling: " + t + "."};
+  for (const k in syn) if (k !== t && (syn[k].indexOf(x) >= 0 || (x.length > 2 && lev(x, k) <= 1))) return {st: "wrong", note: ""};
+  return {st: "wrong", note: "Write one word: noun, verb or adjective."};
+}
+function checkFind(q, raw) {
+  const want = q.a.map(w => w.toLowerCase()), wantSt = want.map(stem);
+  const got = wordsOf(raw), gotSt = got.map(stem);
+  const missing = q.a.filter((w, i) => gotSt.indexOf(wantSt[i]) < 0);
+  const extra = [];
+  got.forEach(w => { if (wantSt.indexOf(stem(w)) < 0 && extra.indexOf(w) < 0) extra.push(w); });
+  if (!missing.length && !extra.length) return {st: "correct"};
+  const parts = [];
+  if (missing.length) parts.push("You missed: " + missing.join(", ") + ".");
+  if (extra.length) parts.push("Not " + q.f + ": " + extra.join(", ") + ".");
+  return {st: "wrong", note: parts.join(" ")};
+}
+// g = the student's sentence, w = the answer-key sentence (both already full())
+function hintFor(q, g, w) {
+  g = " " + g + " "; w = " " + w + " ";
+  const ing = / (am|is|are) (not )?[a-z]+ing /;
+  if (/ does not [a-z]+s /.test(g) && !/ does not [a-z]+s /.test(w)) return "After doesn't, the verb has no -s.";
+  if (/ do not /.test(g) && / does not /.test(w)) return "With he, she and it we use doesn't.";
+  if (/ does not /.test(g) && / do not /.test(w)) return "With I, you, we and they we use don't.";
+  if (/ (do|does) not /.test(g) && / (am|is|are) not /.test(w)) return "With the verb be we don't use don't or doesn't. Use am not, isn't or aren't.";
+  if (q.t === "stative" && ing.test(g) && !ing.test(w)) return "Stative verbs don't take -ing. Use the Present Simple.";
+  if (ing.test(w) && !ing.test(g)) return "It is happening now: use am / is / are + verb-ing.";
+  return "";
+}
+// the part of a typed sentence that goes in the blank
+function blankPart(q, got) {
+  const s = full(filled(q, "§")).split("§");
+  const pre = (s[0] || "").trim(), post = (s[1] || "").trim();
+  let x = got;
+  if (pre && x.indexOf(pre + " ") === 0) x = x.slice(pre.length + 1);
+  if (post && x.length > post.length && x.slice(-(post.length + 1)) === " " + post) x = x.slice(0, -(post.length + 1));
+  return x.trim();
+}
+function fillHint(q, got) {
+  const b = blankPart(q, got);
+  const s = full(filled(q, "§")).split("§");
+  const sg = (s[0] + " " + b + " " + (s[1] || "")).replace(/\s+/g, " ").trim();
+  const h = hintFor(q, sg, full(filled(q, q.a[0])));
+  if (h) return h;
+  const exp = full(q.a[0]);
+  if (exp === b + "s" || exp === b + "es" || (exp.slice(-3) === "ies" && b === exp.slice(0, -3) + "y")) return "With he, she and it, add -s (or -es / -ies).";
+  if (lev(b, exp) <= 2) return "Check your spelling.";
+  return "";
+}
+// result: {st: correct | almost | wrong | empty | free, note}
+function checkWriting(q, text) {
+  const raw = String(text == null ? "" : text).trim();
+  if (!raw) return {st: "empty"};
+  if (q.k === "free") return {st: "free"};
+  if (q.k === "pos") return checkPos(q, raw);
+  if (q.k === "find") return checkFind(q, raw);
+  const got = full(raw);
+  const forms = a => q.k === "fill" ? fillVariants(q, a) : [a];
+  const want = [];
+  q.a.forEach(a => forms(a).forEach(v => want.push(full(v))));
+  if (want.indexOf(got) >= 0) return {st: "correct"};
+  for (const pair of (q.al || [])) {
+    if (forms(pair[0]).map(full).indexOf(got) >= 0) return {st: "almost", note: pair[1]};
+  }
+  const na = noApos(got);
+  if (na !== got && want.indexOf(na) >= 0) return {st: "almost", note: "Don't forget the apostrophe: don't, doesn't, isn't, aren't, I'm."};
+  let note = "";
+  if (q.k === "fill") note = fillHint(q, got);
+  else if (q.k === "neg" && !/\b(not|never)\b/.test(got)) note = "Make the sentence negative: use don't / doesn't, or am not / isn't / aren't.";
+  else if (q.k === "fix" && got === full(q.s)) note = "This is the same sentence. Find the mistake and fix it.";
+  else if (q.k === "neg" || q.k === "fix") note = hintFor(q, got, full(q.a[0]));
+  return {st: "wrong", note: note};
+}
+function keyAnswer(q) { return q.k === "find" ? q.a.join(", ") : q.a[0]; }
+
+// ===== UI =====
+const app = document.getElementById("app");
+const BYID = {};
+MCQ.forEach(q => { BYID[q.id] = q; });
+WR.forEach(q => { BYID[q.id] = q; });
+const KEY = "yuli-english-quiz-2311";
+const LABEL = {n: "noun", v: "verb", a: "adjective"};
+const STRIP = [["My", ""], ["best", "a"], ["friend", "n"], ["is reading", "v"], ["a", ""], ["funny", "a"], ["book", "n", "."]];
+const KIND_Q = {
+  pos: "Is the highlighted word a noun, a verb or an adjective? Write one word.",
+  fix: "There is one mistake in this sentence. Write the correct sentence.",
+  neg: "Write this sentence in the negative.",
+  fill: "Complete the sentence. Use the verb in brackets in the correct form.",
+  order: "Put the words in the correct order to make a sentence. Tap the words or type."
+};
+const ICON = {
+  arrow: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  back: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H6M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  x: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+  bang: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="12" cy="19" r="1.9" fill="currentColor"/></svg>',
+  spark: '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3l1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9z" fill="currentColor"/></svg>'
+};
+
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, ch => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"})[ch]); }
+function md(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<b class="key">$1</b>').replace(/___/g, '<span class="blank" role="img" aria-label="blank"></span>'); }
+function qText(q) { if (q.o) return q.q || CH; if (q.k === "find") return "Write all the " + q.f + " in the sentence."; return q.q || KIND_Q[q.k] || ""; }
+
+// ---------- saved progress (this browser only) ----------
+function load(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } }
+function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+const P = load(KEY) || {};
+P.best = P.best || {}; P.tests = P.tests || [];
+function saveP() { store(KEY, P); }
+let saveT = 0;
+function saveSoon() { clearTimeout(saveT); saveT = setTimeout(() => store(KEY + "-state", {at: Date.now(), S: S}), 400); }
+
+let S = {v: "home", t: "pos", tab: "learn", runs: {}, test: null, drafts: {}, onlyWrong: false};
+function validState(x) {
+  if (!x || typeof x !== "object" || !x.v) return false;
+  const okIds = r => r && Array.isArray(r.ids) && r.ids.length && r.ids.every(id => BYID[id]);
+  if (x.runs) for (const k in x.runs) if (!okIds(x.runs[k])) return false;
+  if (x.test && !okIds(x.test)) return false;
+  if (x.t && !TOPICS[x.t]) return false;
+  return true;
+}
+
+// ---------- runs ----------
+function pool(t, kind, set) { return (kind === "mcq" ? MCQ : WR).filter(q => q.t === t && q.set === set); }
+function optOrders(ids) {
+  const o = {};
+  ids.forEach(id => { const q = BYID[id]; if (q.o) { const idx = q.o.map((_, i) => i); o[id] = keepOrder(q) ? idx : shuffle(idx); } });
+  return o;
+}
+function newRun(t, kind) {
+  const p = pool(t, kind, "p");
+  const ids = kind === "mcq" ? shuffle(p.map(q => q.id))
+    : shuffle(p.filter(q => q.k !== "free").map(q => q.id)).concat(p.filter(q => q.k === "free").map(q => q.id));
+  ids.forEach(id => { delete S.drafts[id]; });
+  return {t: t, kind: kind, ids: ids, o: optOrders(ids), i: 0, ans: {}, done: false};
+}
+function getRun(t, kind) { const k = t + ":" + kind; if (!S.runs[k]) S.runs[k] = newRun(t, kind); return S.runs[k]; }
+function ctx() { return S.v === "test" ? S.test : getRun(S.t, S.tab); }
+function isOk(a) { return !!a && (a.ok === true || a.st === "correct" || a.st === "almost"); }
+function score(c) { return c.ids.filter(id => isOk(c.ans[id])).length; }
+function newTest() {
+  const m = [], w = [];
+  TORDER.forEach(t => {
+    m.push.apply(m, shuffle(pool(t, "mcq", "t").map(q => q.id)).slice(0, TEST_MCQ));
+    w.push.apply(w, shuffle(pool(t, "wr", "t").map(q => q.id)).slice(0, TEST_WR));
+  });
+  const ids = shuffle(m).concat(shuffle(w));
+  ids.forEach(id => { delete S.drafts[id]; });
+  return {uid: Date.now().toString(36), ids: ids, o: optOrders(ids), i: -1, ans: {}, done: false, view: "result", nm: m.length, warn: ""};
+}
+function answered(T, id) {
+  const q = BYID[id], a = T.ans[id];
+  if (q.o) return !!a && a.pick != null;
+  return String((a && a.text) || S.drafts[id] || "").trim().length > 0;
+}
+function stats(T) {
+  const by = {}; let s = 0;
+  TORDER.forEach(t => { by[t] = [0, 0]; });
+  T.ids.forEach(id => { const q = BYID[id]; by[q.t][1]++; if (isOk(T.ans[id])) { by[q.t][0]++; s++; } });
+  return {s: s, n: T.ids.length, by: by};
+}
+
+// ---------- views ----------
+function render() {
+  let h;
+  if (S.v === "topic" && TOPICS[S.t]) h = vTopic();
+  else if (S.v === "test" && S.test) h = vTest();
+  else if (S.v === "cheat") h = vCheat();
+  else { S.v = "home"; h = vHome(); }
+  app.innerHTML = h;
+  app.querySelectorAll("[data-tpl]").forEach(el => {
+    const t = document.getElementById(el.getAttribute("data-tpl"));
+    if (t) el.appendChild(t.content.cloneNode(true));
+  });
+  store(KEY + "-state", {at: Date.now(), S: S});
+}
+function bar(cls, title) {
+  return `<header class="bar ${cls}"><div class="wrap barin"><button class="back" data-act="home" aria-label="Back to the start page">${ICON.back}<span>Home</span></button><h1 class="ttl">${esc(title)}</h1></div></header>`;
+}
+
+function vHome() {
+  const strip = STRIP.map((w, i) => w[1]
+    ? `<span class="sw"><span><span class="hl ${w[1]}" style="--i:${i}">${esc(w[0])}</span>${w[2] || ""}</span><small>${LABEL[w[1]]}</small></span>`
+    : `<span class="sw"><span>${esc(w[0])}</span><small></small></span>`).join("");
+  const rows = TORDER.map(t => {
+    const T = TOPICS[t], nm = pool(t, "mcq", "p").length, nw = pool(t, "wr", "p").length;
+    const bm = P.best[t + ":mcq"], bw = P.best[t + ":wr"];
+    const best = [bm ? `Best multiple choice: ${bm[0]}/${bm[1]}` : "", bw ? `Best writing: ${bw[0]}/${bw[1]}` : ""].filter(Boolean).join("<br>");
+    return `<button class="trow ${T.cls}" data-act="topic" data-t="${t}">
+      <span class="tname"><span class="hl">${esc(T.title)}</span></span>
+      <span class="tsub">${esc(T.sub)}</span>
+      <span class="tmeta">Learn, ${nm} multiple choice, ${nw} writing</span>
+      ${best ? `<span class="tbest">${best}</span>` : ""}
+      <span class="go" aria-hidden="true">${ICON.arrow}</span></button>`;
+  }).join("");
+  const T = S.test, live = T && !T.done && T.i >= 0, last = P.tests[0];
+  const nm = TORDER.length * TEST_MCQ, nw = TORDER.length * TEST_WR;
+  return `<header class="hero"><div class="wrap">
+      <h1>English quiz prep</h1>
+      <p class="for">For your quiz on Monday, 23 November</p>
+      <div class="strip" role="img" aria-label="Example: My best friend is reading a funny book. Best and funny are adjectives, friend and book are nouns, is reading is a verb.">${strip}</div>
+      <p class="luck">Good luck, Yuli!</p>
+    </div></header>
+    <main class="wrap list">
+      <h2 class="sec">Topics</h2>
+      ${rows}
+      <section class="testcard">
+        <h2>Final test</h2>
+        <p>${nm + nw} questions from all three topics: ${nm} multiple choice and ${nw} writing. At the end you get a score for each topic, so you know what to review.</p>
+        ${last ? `<p class="last">Last test: ${last.s}/${last.n} (${Math.round(100 * last.s / last.n)}%)</p>` : ""}
+        ${live ? `<div class="row"><button class="btn pen" data-act="test-go">Continue the test</button><button class="btn ghost" data-act="test-new">Start a new test</button></div>`
+               : `<button class="btn big pen" data-act="test-new">Start the test</button>`}
+      </section>
+      <button class="trow" data-act="cheat"><span class="tname">Quick review</span><span class="tsub">All the rules and the top mistakes on one page. Read it before the quiz.</span><span class="go" aria-hidden="true">${ICON.arrow}</span></button>
+    </main>`;
+}
+
+function vTopic() {
+  const t = S.t, T = TOPICS[t];
+  const tabs = [["learn", "Learn"], ["mcq", "Multiple choice"], ["wr", "Writing"]].map(x =>
+    `<button role="tab" aria-selected="${S.tab === x[0]}" class="tab${S.tab === x[0] ? " on" : ""}" data-act="tab" data-tab="${x[0]}">${x[1]}</button>`).join("");
+  const body = S.tab === "learn"
+    ? `<div class="learn" data-tpl="learn-${t}"></div>
+       <div class="after"><button class="btn big" data-act="tab" data-tab="mcq">Practice: multiple choice ${ICON.arrow}</button><button class="btn big ghost" data-act="tab" data-tab="wr">Practice: writing ${ICON.arrow}</button></div>`
+    : vRun(getRun(t, S.tab));
+  return bar(T.cls, T.title) + `<nav class="tabs wrap" role="tablist" aria-label="${esc(T.title)}">${tabs}</nav><main class="wrap">${body}</main>`;
+}
+
+function vCheat() {
+  return bar("t-cheat", "Quick review") + `<main class="wrap"><div class="learn" data-tpl="cheat"></div>
+    <div class="after"><button class="btn big pen" data-act="test-new">Start the final test ${ICON.arrow}</button></div></main>`;
+}
+
+function vRun(c) {
+  if (c.done) return vRunEnd(c);
+  const q = BYID[c.ids[c.i]], n = c.ids.length;
+  return `<div class="prog"><span>Question ${c.i + 1} of ${n}</span><span class="sc">${ICON.check} ${score(c)} correct</span></div>
+    <div class="pbar"><i style="width:${(100 * c.i / n).toFixed(1)}%"></i></div>
+    ${q.o ? vMcq(q, c, "practice") : vWr(q, c, "practice")}`;
+}
+
+function vMcq(q, c, mode) {
+  const a = c.ans[q.id], shown = mode === "practice" && !!a;
+  const order = c.o[q.id] || q.o.map((_, i) => i);
+  const opts = order.map((oi, k) => {
+    let cls = "";
+    if (shown) cls = oi === q.a ? "ok" : oi === a.pick ? "bad" : "dim";
+    else if (a && a.pick === oi) cls = "sel";
+    const mark = shown && oi === q.a ? `<span class="mk">${ICON.check}</span>` : shown && oi === a.pick ? `<span class="mk">${ICON.x}</span>` : "";
+    return `<button class="opt ${cls}" data-act="pick" data-id="${q.id}" data-o="${oi}"${shown ? " disabled" : ""} aria-pressed="${!!a && a.pick === oi}"><span class="let">${"ABCD"[k]}</span><span class="otx">${esc(q.o[oi])}</span>${mark}</button>`;
+  }).join("");
+  const head = q.s ? `<p class="sent">${md(q.s)}</p><p class="qq">${md(q.q || CH)}</p>` : `<p class="qbig">${md(q.q || CH)}</p>`;
+  const fb = shown ? feedback(a.ok ? "correct" : "wrong", "", q.e, a.ok ? "" : esc(q.o[q.a])) + nextBtn(c) : "";
+  return `<article class="card">${q.tricky ? '<p class="trk">Tricky one!</p>' : ""}${head}<div class="opts">${opts}</div>${fb}</article>`;
+}
+
+function vWr(q, c, mode) {
+  const a = c.ans[q.id], practice = mode === "practice";
+  const busy = practice && !!a && a.st === "checking";
+  const checked = practice && !!a && !!a.st && !busy;
+  const locked = checked || busy;
+  const val = a && a.text != null ? a.text : (S.drafts[q.id] || "");
+  const single = q.k === "pos" || q.k === "find" || q.k === "fill";
+  const enter = practice ? "ck-" + q.id : "tnext";
+  const ph = {pos: "noun, verb or adjective", find: "Write the words, like: big, red", fill: "Write the missing words", free: "Write your sentences here"}[q.k] || "Write the whole sentence";
+  const common = `id="in-${q.id}" class="inp" data-draft="${q.id}"${locked ? " readonly" : ""} autocomplete="off" autocorrect="off" spellcheck="false" placeholder="${esc(ph)}"`;
+  const field = single
+    ? `<input type="text" ${common} data-enter="${enter}" autocapitalize="none" value="${esc(val)}">`
+    : `<textarea rows="${q.k === "free" ? 4 : 2}" ${common}${q.k === "free" ? "" : ` data-enter="${enter}"`} autocapitalize="sentences">${esc(val)}</textarea>`;
+  let top;
+  if (q.k === "free") top = `<p class="qbig">${md(q.q)}</p>`;
+  else if (q.k === "order") top = `<p class="qq">${esc(qText(q))}</p><div class="chips">${q.w.map(w => `<button class="chip" data-act="chip" data-id="${q.id}" data-w="${esc(w)}"${locked ? " disabled" : ""}>${esc(w)}</button>`).join("")}</div>`;
+  else top = `<p class="sent">${md(q.s)}</p><p class="qq">${esc(qText(q))}</p>`;
+  let below = q.k === "order" && !locked ? `<div class="chiprow"><button class="linkbtn" data-act="clear" data-id="${q.id}">Clear</button></div>` : "";
+  below += `<p class="warnmsg" id="msg-${q.id}" aria-live="polite"></p>`;
+  if (practice) {
+    if (!a || !a.st) below += `<button class="btn big mt" id="ck-${q.id}" data-act="check" data-id="${q.id}">${q.k === "free" ? "Check my answer" : "Check"}</button>`;
+    else if (busy) below += `<button class="btn big mt" disabled>The AI teacher is reading<span class="load" aria-hidden="true"><i></i><i></i><i></i></span></button>`;
+    else below += wrFeedback(q, a) + nextBtn(c);
+  }
+  return `<article class="card">${top}<label class="lbl" for="in-${q.id}">Your answer</label>${field}${below}</article>`;
+}
+
+function stIcon(st) { return st === "correct" ? ICON.check : st === "almost" ? ICON.bang : ICON.x; }
+function feedback(st, note, e, right) {
+  const cls = {correct: "ok", almost: "warn"}[st] || "bad";
+  const head = {correct: "Correct!", almost: "Almost!", empty: "No answer"}[st] || "Not quite";
+  return `<div class="fb ${cls}" role="status"><p class="fbh">${stIcon(st)} ${head}</p>
+    ${note ? `<p class="note">${esc(note)}</p>` : ""}
+    ${right ? `<p>Correct answer: <b>${right}</b></p>` : ""}
+    ${e ? `<p>${md(e)}</p>` : ""}</div>`;
+}
+function rightAns(q) {
+  if (q.k === "fill") {
+    const parts = q.s.replace(/\s*\([^)]*\)/g, "").split("___");
+    return esc(parts[0]) + "<u>" + esc(q.a[0]) + "</u>" + esc(parts[1] || "");
+  }
+  return esc(keyAnswer(q));
+}
+function nextBtn(c) {
+  const last = c.i >= c.ids.length - 1;
+  return `<button class="btn big pen mt next" data-act="next">${last ? "See my score" : "Next question"} ${ICON.arrow}</button>`;
+}
+function retryBtn(q) { return `<button class="btn big ghost mt" data-act="retry" data-id="${q.id}">Fix it and check again</button>`; }
+function wrFeedback(q, a) {
+  if (q.k !== "free") return feedback(a.st, a.note, q.e, a.st === "correct" ? "" : rightAns(q)) + ai2Block(q, a);
+  if (a.st === "self") return selfBlock(q, a);
+  if (a.by === "self") {
+    return `<div class="fb ${a.st === "correct" ? "ok" : "bad"}" role="status"><p class="fbh">${a.st === "correct" ? ICON.check + " Well done!" : ICON.x + " Fix it and try again"}</p><p>Example answer: <b>${esc(q.m)}</b></p></div>` + (a.st === "correct" ? "" : retryBtn(q));
+  }
+  const cls = {correct: "ok", almost: "warn"}[a.st] || "bad";
+  const head = {correct: "Correct!", almost: "Almost!"}[a.st] || "Not quite";
+  const better = a.fix && a.st !== "correct" && full(a.fix) !== full(a.text) ? `<p>Better: <b>${esc(a.fix)}</b></p>` : "";
+  return `<div class="fb ${cls}" role="status"><p class="fbh">${stIcon(a.st)} ${head}</p>
+    ${a.fb ? `<p>${esc(a.fb)}</p>` : ""}${better}
+    <p>Example answer: <b>${esc(q.m)}</b></p>
+    <p class="aiby">${ICON.spark} Checked by the AI teacher</p></div>` + (a.st === "correct" ? "" : retryBtn(q));
+}
+function selfBlock(q, a) {
+  const why = a.why === "busy" ? "The AI teacher is busy right now, so check your answer yourself."
+    : a.why === "err" ? "The AI teacher couldn't check this right now, so check your answer yourself."
+    : "Compare your answer with the example.";
+  return `<div class="self"><p class="fbh">${why}</p>
+    <p class="lbl mt">Example answer</p><p class="model">${esc(q.m)}</p>
+    <ul class="cl">${q.c.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    <div class="row"><button class="btn" data-act="self" data-id="${q.id}" data-ok="1">${ICON.check} I got it right</button><button class="btn ghost" data-act="self" data-id="${q.id}" data-ok="0">I need to fix it</button></div></div>`;
+}
+function ai2Block(q, a) {
+  if (!a) return "";
+  if (a.ai2 === "yes") return `<p class="aiby">${ICON.spark} AI teacher: your answer is also correct! ${esc(a.ai2fb || "")}</p>`;
+  if (a.st !== "wrong" || ["fill", "neg", "fix", "order"].indexOf(q.k) < 0 || !a.text || !ai.fn || ai.denied) return "";
+  if (a.ai2 === "checking") return `<p class="aiby">Asking the AI teacher<span class="load" aria-hidden="true"><i></i><i></i><i></i></span></p>`;
+  if (a.ai2 === "no") return `<p class="aiby">${ICON.spark} AI teacher: ${esc(a.ai2fb || "The answer key is right this time.")}</p>`;
+  if (a.ai2 === "err") return `<p class="aiby">The AI teacher couldn't check this right now.</p>`;
+  return `<button class="linkbtn" data-act="ai2" data-id="${q.id}">Think your answer is also right? Ask the AI teacher</button>`;
+}
+function grade(s, n) {
+  return `<div class="grade" role="img" aria-label="Score: ${s} out of ${n}"><svg viewBox="0 0 220 140" aria-hidden="true"><path d="M60 30C110 10 190 18 202 58C214 98 160 128 104 126C48 124 12 98 16 66C20 40 52 22 96 20" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><span>${s}/${n}</span></div>`;
+}
+function endMsg(r) {
+  if (r >= 0.9) return ["Excellent!", "You really know this topic."];
+  if (r >= 0.75) return ["Very good!", "Read your mistakes below, then try again."];
+  if (r >= 0.5) return ["Good start", "Read your mistakes and the Learn page, then try again."];
+  return ["Keep going", "Read the Learn page again, then try again. You can do it!"];
+}
+function vRunEnd(c) {
+  const n = c.ids.length, s = score(c), m = endMsg(s / n);
+  const wrong = c.ids.filter(id => !isOk(c.ans[id]));
+  const other = c.kind === "mcq" ? ["wr", "Practice writing"] : ["mcq", "Practice multiple choice"];
+  return `<section class="end">${grade(s, n)}
+    <h2 class="verdict">${m[0]}</h2><p class="endmsg">${m[1]}</p>
+    <div class="row"><button class="btn big" data-act="again">Try again</button><button class="btn big ghost" data-act="tab" data-tab="${other[0]}">${other[1]}</button></div>
+    ${wrong.length ? `<h3 class="h3">Your mistakes</h3>${wrong.map(id => vReview(BYID[id], c.ans[id], 0)).join("")}` : ""}
+  </section>`;
+}
+function vReview(q, a, num) {
+  const ok = isOk(a), st = ok ? (a.st === "almost" ? "almost" : "correct") : "wrong";
+  let yours, right;
+  if (q.o) { yours = a && a.pick != null ? esc(q.o[a.pick]) : "<i>No answer</i>"; right = esc(q.o[q.a]); }
+  else { yours = a && a.text && a.text.trim() ? esc(a.text) : "<i>No answer</i>"; right = q.k === "free" ? esc(q.m) : rightAns(q); }
+  const head = st === "correct" ? ICON.check + " Correct" : st === "almost" ? ICON.bang + " Almost" : ICON.x + " Not quite";
+  return `<article class="ritem">
+    <p class="rtop"><span>${num ? "Question " + num + ": " : ""}${esc(TOPICS[q.t].title)}</span><span class="rst ${st}">${head}</span></p>
+    ${q.k === "free" ? `<p class="rs">${md(q.q)}</p>` : ""}
+    ${q.s && q.k !== "order" ? `<p class="rs">${md(q.s)}</p>` : ""}
+    ${q.w ? `<p class="rs">${q.w.map(esc).join(" / ")}</p>` : ""}
+    ${q.k === "free" ? "" : `<p class="rq">${md(qText(q))}</p>`}
+    <p class="ra">Your answer: <b>${yours}</b></p>
+    ${st !== "correct" ? `<p class="ra">${q.k === "free" ? "Example answer" : "Correct answer"}: <b>${right}</b></p>` : ""}
+    ${a && a.note ? `<p class="ra note">${esc(a.note)}</p>` : ""}
+    ${a && a.fb ? `<p class="ra">${esc(a.fb)}</p>` : ""}
+    ${q.e ? `<p class="exp">${md(q.e)}</p>` : ""}
+    ${q.o ? "" : ai2Block(q, a)}
+  </article>`;
+}
+
+function vTest() {
+  const T = S.test;
+  let body;
+  if (T.i < 0) body = vTestIntro(T);
+  else if (T.done) body = T.view === "review" ? vTestReview(T) : vTestResult(T);
+  else body = vTestQ(T);
+  return bar("t-test", "Final test") + `<main class="wrap">${body}</main>`;
+}
+function vTestIntro(T) {
+  const n = T.ids.length;
+  return `<section class="card intro mt"><p class="qbig">Ready?</p><ul>
+    <li>${n} questions. Part A: ${T.nm} multiple choice. Part B: ${n - T.nm} writing.</li>
+    <li>Like a real test, you see the answers only at the end.</li>
+    <li>You can go back, skip a question and change your answers before you finish.</li>
+    <li>Write full words and check your spelling.</li></ul>
+    <button class="btn big pen" data-act="test-start">Start ${ICON.arrow}</button></section>`;
+}
+function vTestQ(T) {
+  const id = T.ids[T.i], q = BYID[id], n = T.ids.length, last = T.i === n - 1;
+  const part = T.i < T.nm ? "Part A: Multiple choice" : "Part B: Writing";
+  return `<div class="prog"><span>${part}</span><span>Question ${T.i + 1} of ${n}</span></div>
+    <div class="pbar"><i style="width:${(100 * T.i / n).toFixed(1)}%"></i></div>
+    ${q.o ? vMcq(q, T, "test") : vWr(q, T, "test")}
+    <div class="tnav"><button class="btn ghost" data-act="tprev"${T.i === 0 ? " disabled" : ""}>${ICON.back} Back</button>
+    ${last ? `<button class="btn pen" id="tnext" data-act="tfinish">Finish the test</button>` : `<button class="btn" id="tnext" data-act="tnext">Next ${ICON.arrow}</button>`}</div>
+    ${T.warn ? `<div class="fb warn" role="status"><p class="fbh">${ICON.bang} ${esc(T.warn)}</p><p>Go back and answer, or <button class="linkbtn" data-act="tfinish" data-force="1">finish anyway</button></p></div>` : ""}
+    <p class="lbl mt">Jump to a question</p>
+    <div class="dots">${T.ids.map((x, k) => `<button class="dot${k === T.i ? " cur" : ""}${answered(T, x) ? " done" : ""}" data-act="tgo" data-k="${k}" aria-label="Question ${k + 1}${answered(T, x) ? ", answered" : ""}">${k + 1}</button>`).join("")}</div>`;
+}
+function vTestResult(T) {
+  const st = stats(T), r = st.s / st.n;
+  const v = r >= 0.85 ? ["You're ready!", "Great work. Read your few mistakes and you're all set for tomorrow."]
+    : r >= 0.7 ? ["Almost ready", "Practice the topics marked below, then take a new test."]
+    : ["Not ready yet", "That's OK! Go over the topics marked below and try a new test."];
+  const rows = TORDER.map(t => {
+    const s = st.by[t][0], n = st.by[t][1], p = n ? s / n : 0;
+    const lab = p >= 0.85 ? ["Strong", "ok"] : p >= 0.6 ? ["Review", "warn"] : ["Practice more", "bad"];
+    return `<div class="tres"><span class="tn">${esc(TOPICS[t].title)}<span class="tag ${lab[1]}">${lab[0]}</span></span><span class="tv">${s}/${n}</span>
+      <div class="meter"><i class="${lab[1]}" style="width:${Math.round(100 * p)}%"></i></div>
+      ${p < 0.85 ? `<button class="btn small ghost" data-act="topic" data-t="${t}" data-tab="learn">Practice this topic ${ICON.arrow}</button>` : ""}</div>`;
+  }).join("");
+  return `<section class="end">${grade(st.s, st.n)}<p class="pct">${Math.round(100 * r)}%</p>
+    <h2 class="verdict">${v[0]}</h2><p class="endmsg">${v[1]}</p>
+    <div>${rows}</div>
+    <div class="row"><button class="btn big" data-act="treview">Review all answers</button><button class="btn big pen" data-act="test-new">Take a new test</button></div></section>`;
+}
+function vTestReview(T) {
+  const items = T.ids.filter(id => !S.onlyWrong || !isOk(T.ans[id]));
+  return `<div class="row"><button class="btn ghost" data-act="tresult">${ICON.back} Back to my score</button></div>
+    <div class="filter"><button class="linkbtn" data-act="onlywrong">${S.onlyWrong ? "Show all questions" : "Show only my mistakes"}</button></div>
+    ${items.length ? items.map(id => vReview(BYID[id], T.ans[id], T.ids.indexOf(id) + 1)).join("") : `<p class="center">No mistakes at all!</p>`}
+    <div class="row"><button class="btn big pen" data-act="test-new">Take a new test</button></div><p class="mt"></p>`;
+}
+
+// ---------- actions ----------
+function toTop() { try { window.scrollTo(0, 0); } catch (e) {} }
+function showFb() {
+  const el = app.querySelector(".next") || app.querySelector(".self");
+  if (el && el.scrollIntoView) { try { el.scrollIntoView({block: "nearest", behavior: "smooth"}); } catch (e) { el.scrollIntoView(false); } }
+}
+function focusIn(id) { const el = document.getElementById("in-" + id); if (el) { try { el.focus(); } catch (e) {} } }
+function pick(id, o) {
+  const c = ctx(), q = BYID[id];
+  if (!q || !c) return;
+  if (S.v === "test") { if (!c.done) { c.ans[id] = {pick: o}; c.warn = ""; render(); } return; }
+  if (c.ans[id]) return;
+  c.ans[id] = {pick: o, ok: o === q.a};
+  render(); showFb();
+}
+function check(id) {
+  const c = ctx(), q = BYID[id];
+  const el = document.getElementById("in-" + id);
+  const text = el ? el.value : (S.drafts[id] || "");
+  S.drafts[id] = text;
+  if (!text.trim()) { const m = document.getElementById("msg-" + id); if (m) m.textContent = "Write your answer first."; focusIn(id); return; }
+  if (q.k !== "free") { c.ans[id] = Object.assign({text: text}, checkWriting(q, text)); render(); showFb(); return; }
+  c.ans[id] = {text: text, st: "checking"};
+  render();
+  aiFree(q, text).then(res => {
+    if (c.ans[id] && c.ans[id].st === "checking") { c.ans[id] = Object.assign({text: text}, res); render(); showFb(); }
+  });
+}
+function next() {
+  const c = ctx();
+  if (c.i < c.ids.length - 1) c.i++;
+  else {
+    c.done = true;
+    const s = score(c), n = c.ids.length, k = c.t + ":" + c.kind, b = P.best[k];
+    if (!b || s / n > b[0] / b[1]) { P.best[k] = [s, n]; saveP(); }
+  }
+  render(); toTop();
+}
+function chip(id, w) {
+  const el = document.getElementById("in-" + id);
+  if (!el || el.readOnly) return;
+  const cur = el.value.replace(/\s+$/, "");
+  el.value = cur ? cur + " " + w : w.charAt(0).toUpperCase() + w.slice(1);
+  S.drafts[id] = el.value; saveSoon();
+}
+function commitDraft(T) {
+  if (!T || T.i < 0 || T.done) return;
+  const id = T.ids[T.i], q = BYID[id];
+  if (!q || q.o) return;
+  const el = document.getElementById("in-" + id);
+  const v = el ? el.value : (S.drafts[id] || "");
+  S.drafts[id] = v; T.ans[id] = {text: v};
+}
+function finishTest(force) {
+  const T = S.test;
+  commitDraft(T);
+  const miss = T.ids.filter(id => !answered(T, id)).length;
+  if (miss && !force) { T.warn = miss === 1 ? "1 question has no answer." : miss + " questions have no answer."; render(); showWarn(); return; }
+  T.ids.forEach(id => {
+    const q = BYID[id], a = T.ans[id] || {};
+    if (q.o) T.ans[id] = {pick: a.pick, ok: a.pick === q.a};
+    else { const text = a.text != null ? a.text : (S.drafts[id] || ""); T.ans[id] = Object.assign({text: text}, checkWriting(q, text)); }
+  });
+  T.done = true; T.view = "result"; T.warn = "";
+  const st = stats(T);
+  P.tests.unshift({uid: T.uid, at: Date.now(), s: st.s, n: st.n, by: st.by});
+  P.tests = P.tests.slice(0, 5); saveP();
+  render(); toTop();
+}
+function showWarn() { const el = app.querySelector(".fb.warn"); if (el && el.scrollIntoView) { try { el.scrollIntoView({block: "nearest", behavior: "smooth"}); } catch (e) {} } }
+function act(a, d) {
+  const T = S.test;
+  switch (a) {
+    case "home": S.v = "home"; break;
+    case "topic": S.v = "topic"; S.t = d.t; S.tab = d.tab || "learn"; break;
+    case "tab": S.tab = d.tab; break;
+    case "cheat": S.v = "cheat"; break;
+    case "pick": pick(d.id, +d.o); return;
+    case "check": check(d.id); return;
+    case "next": next(); return;
+    case "again": { const c = ctx(); S.runs[c.t + ":" + c.kind] = newRun(c.t, c.kind); break; }
+    case "self": { const c = ctx(), x = c.ans[d.id]; if (x) { x.st = d.ok === "1" ? "correct" : "wrong"; x.by = "self"; } render(); showFb(); return; }
+    case "retry": { const c = ctx(), x = c.ans[d.id]; if (x) { S.drafts[d.id] = x.text; delete c.ans[d.id]; } render(); focusIn(d.id); return; }
+    case "ai2": second(d.id); return;
+    case "chip": chip(d.id, d.w); return;
+    case "clear": { const el = document.getElementById("in-" + d.id); if (el) el.value = ""; S.drafts[d.id] = ""; saveSoon(); return; }
+    case "test-new": S.test = newTest(); S.v = "test"; S.onlyWrong = false; break;
+    case "test-go": S.v = "test"; break;
+    case "test-start": T.i = 0; break;
+    case "tnext": commitDraft(T); T.warn = ""; T.i = Math.min(T.i + 1, T.ids.length - 1); break;
+    case "tprev": commitDraft(T); T.warn = ""; T.i = Math.max(T.i - 1, 0); break;
+    case "tgo": commitDraft(T); T.warn = ""; T.i = Math.max(0, Math.min(+d.k, T.ids.length - 1)); break;
+    case "tfinish": finishTest(d.force === "1"); return;
+    case "treview": T.view = "review"; break;
+    case "tresult": T.view = "result"; break;
+    case "onlywrong": S.onlyWrong = !S.onlyWrong; render(); return;
+    default: return;
+  }
+  render(); toTop();
+}
+document.addEventListener("click", ev => {
+  const el = ev.target && ev.target.closest ? ev.target.closest("[data-act]") : null;
+  if (!el || el.disabled) return;
+  act(el.getAttribute("data-act"), el.dataset);
+});
+document.addEventListener("input", ev => {
+  const el = ev.target;
+  if (el && el.dataset && el.dataset.draft) { S.drafts[el.dataset.draft] = el.value; saveSoon(); }
+});
+document.addEventListener("keydown", ev => {
+  const el = ev.target;
+  if (ev.key === "Enter" && !ev.shiftKey && !ev.isComposing && el && el.dataset && el.dataset.enter) {
+    ev.preventDefault();
+    const b = document.getElementById(el.dataset.enter);
+    if (b && !b.disabled) b.click();
+  }
+});
+
+// ---------- the AI teacher (only where this page can ask Claude) ----------
+const ai = {fn: null, denied: false};
+let sampleP = null;
+function getSample() {
+  if (!sampleP) {
+    sampleP = new Promise(res => {
+      let done = false;
+      const fin = v => { if (!done) { done = true; res(v || null); } };
+      try {
+        if (!window.claude || typeof window.claude.use !== "function") { fin(null); return; }
+        setTimeout(() => fin(null), 12000);
+        Promise.resolve(window.claude.use("sample")).then(fin, () => fin(null));
+      } catch (e) { fin(null); }
+    }).then(fn => { ai.fn = fn; return fn; });
+  }
+  return sampleP;
+}
+const RULES = "Class rules: Present Simple for habits and facts (he/she/it + -s/-es/-ies; negative: don't/doesn't + base verb). The verb be: am/is/are, negative am not/isn't/aren't (never don't with be). Present Progressive = am/is/are + verb-ing for things happening now. Stative verbs (think = have an opinion, feel, understand, believe, know, like, love, hate, want, need) stay in the Present Simple, even with now; 'think about' (= considering right now) can be in the Present Progressive. Adjectives come before the noun or after be, and never take -s.";
+function promptFree(q, text) {
+  return "You are a kind, encouraging English teacher checking a 7th-grade student's writing (English level A2, Israel).\n" +
+    "Task: " + q.q + "\nWhat the task practices: " + q.g + ".\n" + RULES + "\n" +
+    "Student's answer: \"\"\"" + String(text).slice(0, 600) + "\"\"\"\n" +
+    "Check the grammar and spelling, and check that the student did what the task asks. Don't take points off for a missing capital letter or full stop (you may mention it). Only judge the English, not the student's ideas.\n" +
+    "Reply with JSON only, exactly in this shape: {\"verdict\":\"correct\",\"feedback\":\"...\",\"corrected\":\"...\"}\n" +
+    "verdict: \"correct\" = good English and the task is done; \"almost\" = one small mistake; \"incorrect\" = the main grammar point is wrong or the task was not done.\n" +
+    "feedback: 1 to 3 short sentences in very simple English, talking to the student as \"you\".\n" +
+    "corrected: the student's answer with the mistakes fixed (the same text if it is already correct).";
+}
+function promptSecond(q, text) {
+  return "You are an English teacher checking a 7th-grade student's exercise (English level A2, Israel).\n" +
+    "Exercise: " + qText(q) + "\n" + (q.s ? "Sentence: " + q.s.replace(/\*\*/g, "") + "\n" : "") + (q.w ? "Words: " + q.w.join(" / ") + "\n" : "") +
+    "Answer key: " + q.a.join("  OR  ") + "\nStudent's answer: \"\"\"" + String(text).slice(0, 400) + "\"\"\"\n" + RULES + "\n" +
+    "The student's answer is different from the answer key. Is it ALSO a fully correct answer to this exercise? Be strict about grammar and spelling (verb endings -s/-es/-ies, -ing spelling, don't/doesn't, am/is/are) and about what the exercise asks: for example, it must be negative if the exercise asks for the negative, and it must keep the meaning of the original sentence. Ignore capital letters and the full stop.\n" +
+    "Reply with JSON only: {\"correct\": true or false, \"feedback\": \"1 or 2 short sentences in simple English for the student\"}";
+}
+async function askJSON(prompt) {
+  const fn = await getSample();
+  if (!fn) throw {code: "unavailable"};
+  const opts = {modelTier: "default"};
+  let v = typeof fn.json === "function" ? await fn.json(prompt, opts) : await fn(prompt, opts);
+  if (v && typeof v === "object" && !("verdict" in v) && !("correct" in v)) {
+    if (v.value && typeof v.value === "object") v = v.value;
+    else if (typeof v.text === "string") v = v.text;
+  }
+  if (typeof v === "string") { const m = v.match(/\{[\s\S]*\}/); v = m ? JSON.parse(m[0]) : null; }
+  if (!v || typeof v !== "object") throw {code: "bad"};
+  return v;
+}
+async function aiFree(q, text) {
+  if (ai.denied) return {st: "self", why: ""};
+  try {
+    const v = await askJSON(promptFree(q, text));
+    const verdict = String(v.verdict || "").toLowerCase();
+    return {st: verdict === "correct" ? "correct" : verdict === "almost" ? "almost" : "wrong", by: "ai", fb: String(v.feedback || ""), fix: String(v.corrected || "")};
+  } catch (e) {
+    const code = e && e.code;
+    if (code === "not_granted") ai.denied = true;
+    return {st: "self", why: code === "rate_limited" ? "busy" : (code === "unavailable" || code === "not_granted") ? "" : "err"};
+  }
+}
+async function second(id) {
+  const c = ctx(), q = BYID[id], a = c && c.ans[id];
+  if (!a || a.ai2 === "checking") return;
+  a.ai2 = "checking"; render();
+  try {
+    const v = await askJSON(promptSecond(q, a.text));
+    const yes = v.correct === true || String(v.correct).toLowerCase() === "true";
+    a.ai2 = yes ? "yes" : "no"; a.ai2fb = String(v.feedback || "");
+    if (yes) {
+      a.st = "correct"; a.note = ""; a.by = "ai";
+      if (c === S.test) { const st = stats(c); const h = P.tests.filter(x => x.uid === c.uid)[0]; if (h) { h.s = st.s; h.by = st.by; saveP(); } }
+    }
+  } catch (e) { if (e && e.code === "not_granted") ai.denied = true; a.ai2 = "err"; }
+  render();
+}
+
+// ---------- start ----------
+function boot(data) {
+  let st = data && data.v ? data : null;
+  if (!st) { const saved = load(KEY + "-state"); if (saved && saved.S && Date.now() - saved.at < 12 * 3600e3) st = saved.S; }
+  if (st && validState(st)) S = Object.assign(S, st);
+  if (S.v === "test" && !S.test) S.v = "home";
+  render();
+  getSample().then(() => { const ae = document.activeElement; if (!ae || !/INPUT|TEXTAREA/.test(ae.tagName)) render(); });
+}
+try { if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => S); } catch (e) {}
+try {
+  if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(boot);
+  else boot((window.claude && window.claude.hot && window.claude.hot.data) || {});
+} catch (e) { boot({}); }
+
+})();
+</script>
+</body>
+</html>
